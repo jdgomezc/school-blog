@@ -1,0 +1,120 @@
+<div class="file-upload">
+    <label for="fileInput" class="upload-button">
+      <span>Upload a File</span>
+    </label>
+    <input 
+      id="fileInput" 
+      type="file" 
+      accept=".pdf,.jpg,.jpeg,.png" 
+      class="hidden-input"
+    />
+    <p id="fileName" class="file-name"></p>
+    <div id="uploadStatus" class="upload-status"></div>
+</div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fileInput = document.getElementById('fileInput');
+      const fileName = document.getElementById('fileName');
+      const uploadStatus = document.getElementById('uploadStatus');
+  
+      if (fileInput) {
+        fileInput.addEventListener('change', async (e) => {
+          const file = (e.target as HTMLInputElement)?.files?.[0];
+          
+          if (!file) return;
+          
+          fileName!.textContent = `Selected: ${file.name}`;
+          uploadStatus!.innerHTML = '<span class="loading">Uploading...</span>';
+          
+          try {
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            const response = await fetch('/api/archivos/index.json', {
+              method: 'POST',
+              body: file,
+              headers: {
+                'x-file-name': file.name,
+                'content-type': file.type
+              }
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+              uploadStatus!.innerHTML = '<span class="success">✓ Upload successful!</span>';
+              console.log('File uploaded:', result);
+            } else {
+              throw new Error(result.error || 'Upload failed');
+            }
+          } catch (error) {
+            uploadStatus!.innerHTML = `<span class="error">✗ Upload failed</span>`;
+            console.error('Upload error:', error);
+          }
+        });
+      }
+    });
+  </script>
+  
+  <style>
+    .file-upload {
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 12px;
+    }
+    
+    .upload-button {
+      background: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-block;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.24);
+      transition: all 0.2s ease;
+    }
+    
+    .upload-button:hover {
+      box-shadow: none;
+      transform: translateY(1px);
+    }
+    
+    .hidden-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+    
+    .file-name {
+      font-size: 14px;
+      color: #4b5563;
+      margin: 0;
+    }
+    
+    .upload-status {
+      font-size: 14px;
+      height: 20px;
+    }
+    
+    .loading {
+      color: #3245ff;
+    }
+    
+    .success {
+      color: #10b981;
+    }
+    
+    .error {
+      color: #ef4444;
+    }
+  </style>

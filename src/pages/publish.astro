@@ -1,9 +1,40 @@
 ---
-import App from '../layouts/App.astro';
+import App from "../layouts/App.astro";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { Upload, Send } from "lucide-react";
 ---
 
 <App>
-	<h1>PUBLICAR</h1>
-	<Button>Publicar</Button>
+  <div class="h-screen grid place-items-center overflow-hidden">
+    <Card className="w-full max-w-4xl mx-4 shadow-lg">
+      <div class="p-4">
+        <h1 class="text-lg font-bold text-center mb-3">Elige un tipo de publicación</h1>
+        
+        <div class="flex flex-wrap justify-center gap-10 mb-3">
+          {['Publicaciones', 'Anuncios', 'Convocatorias', 'Cronogramas'].map((tipo) => (
+            <Button key={tipo} variant="outline" className="px-3 py-1 text-sm">{tipo}</Button>
+          ))}
+        </div>
+
+        <CardContent className="p-0">
+          <div class="space-y-2">
+            <Input placeholder="Título" className="p-2 border rounded-md text-sm" />
+            <Textarea placeholder="Descripción" className="p-2 border rounded-md text-sm resize-none" rows={2} />
+          </div>
+
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-2 mt-3">
+            <Button variant="outline" className="flex items-center gap-2 w-full sm:w-auto text-sm">
+              <Upload size={14} /> Adjuntar archivo
+            </Button>
+            <Button className="flex items-center gap-2 w-full sm:w-auto text-sm">
+              <Send size={14} /> Publicar
+            </Button>
+          </div>
+        </CardContent>
+      </div>
+    </Card>
+  </div>
 </App>

@@ -129,7 +129,7 @@ const posts: Post[] = [
 
 <Layout home="true">
 	<ImagesCarousel client:load />
-	<article class="px-32 py-16 grid grid-cols-3 gap-y-12">
+	<article class="px-24 py-16 grid grid-cols-3 gap-y-12 w-full justify-items-center">
 		{
 			posts.map(({id, title, content, date, type, author}) => (
 				<Post

@@ -1,8 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ImagesCarousel from "../components/ImagesCarousel"
+import Layout from '@/layouts/Layout.astro';
+import ImagesCarousel from "@/components/ImagesCarousel"
+import Post from "@/components/Post.astro"
+
+import bessie from "@/assets/bessie.jpeg"
 ---
 
 <Layout home="true">
 	<ImagesCarousel client:load />
+	<article class="px-16 py-8">
+		<Post
+			type="post"
+			id="1"
+			author={{
+				id: "1",
+				name: "Seño Bessie",
+				image: bessie.src,
+				role: "Directora"
+			}}
+			title="Días de vacaciones de Semana Santa"
+			date={new Date()}
+			content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus nec nunc tincidunt fermentum. Nullam nec purus nec nunc tincidunt fermentum."
+		/>
+	</article>
 </Layout>

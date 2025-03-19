@@ -4,11 +4,11 @@ declare global {
     route: string;
   }
 
-  interface Contact {
+  interface Author {
+    id: string;
     name: string;
-    link: string;
-    Icon: ((_props: Props) => any) & ImageMetadata;
-    label: string;
+    role: string;
+    image: string;
   }
 }
 

@@ -1,39 +1,39 @@
 ---
-import App from '../layouts/App.astro';
+import Layout from '../layouts/Layout.astro';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 ---
 
-<App>
-    <div class="h-screen grid place-items-center">
-        <div class="w-full max-w-md px-4">
-            <h1 class="text-2xl font-bold mb-2 text-center">Iniciar sesión</h1>
-            <p class="text-gray-600 mb-6 text-center">
-                Ingresa tus credenciales para acceder a tu cuenta.
-            </p>
-            <div class="rounded-lg bg-white p-6 shadow-md border border-gray-300"> 
-                <form class="space-y-4">
-                    <div>
-                        <Label htmlFor="username" className='mb-2 block'>Nombre de usuario</Label>
-                        <Input id="username" type="text" placeholder="Ingresa tu nombre de usuario" />
-                    </div>
+<Layout>
+<div class="flex-1 grid place-items-center">
+    <div class="max-w-md px-4">
+        <h1 class="text-2xl font-bold mb-2 text-center">Iniciar sesión</h1>
+        <p class="text-gray-600 mb-6 text-center">
+            Ingresa tus credenciales para poder publicar.
+        </p>
+        <div class="rounded-lg bg-white p-6 shadow-md border border-gray-300 h-64">
+            <form class="space-y-4 h-full flex flex-col">
+                <div>
+                    <Label htmlFor="username" className='mb-2 block'>Nombre de usuario</Label>
+                    <Input id="username" type="text" placeholder="Ingresa tu nombre de usuario" />
+                </div>
 
-                    <div>
-                        <Label htmlFor="password" className='mb-2 block'>Contraseña</Label>
-                        <Input id="password" type="password" placeholder="Ingresa tu contraseña" />
-                    </div>
+                <div>
+                    <Label htmlFor="password" className='mb-2 block'>Contraseña</Label>
+                    <Input id="password" type="password" placeholder="Ingresa tu contraseña" />
+                </div>
 
-                    <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
-                        <a href="#" class="text-sm text-blue-500 hover:underline">
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                        <Button>
-                            Iniciar sesión
-                        </Button>
-                    </div>
-                </form>
-            </div>
+                <div class="flex flex-col justify-between items-center gap-3 mt-auto w-full">
+                    <Button className="w-full flex" onClick={undefined}>
+                        Iniciar sesión
+                    </Button>
+                    <a href="#" class="text-xs text-blue-400 hover:underline">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
-</App>
+</div>
+</Layout>

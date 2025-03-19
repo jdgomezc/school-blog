@@ -1,15 +1,59 @@
 ---
+import WhatsApp from '@/assets/whatsapp.svg';
+import Facebook from '@/assets/facebook.svg';
+import Phone from '@/assets/phone.svg';
+
+const contacts: Contact[] = [
+  {
+    name: 'WhatsApp',
+    Icon: WhatsApp,
+    link: 'https://wa.me/50212345678',
+    label: '1234-5678',
+  },
+  {
+    name: 'Facebook',
+    Icon: Facebook,
+    link: 'https://www.facebook.com/escuela25deseptiembre',
+    label: 'Escuela 25 de Septiembre',
+  },
+  {
+    name: 'Número de teléfono',
+    Icon: Phone,
+    link: 'tel:+50223569558',
+    label: '2356-9558'
+  },
+]
+
 ---
-<footer class="flex bg-zinc-400 flex-row w-full justify-between px-20 py-10">
-  <h1 class="font-bold text-xl">Escuela 25 de Septiembre</h1>
+
+<footer class="flex bg-zinc-400 flex-row w-full justify-between px-20 py-10 mt-auto">
+  <section>
+    <article class="flex flex-row gap-2">
+      <div class="my-auto">
+        <svg width={24} height={24} viewBox="0 0 24 24"><path d="M21 17v-6.9L12 15L1 9l11-6l11 6v8zm-9 4l-7-3.8v-5l7 3.8l7-3.8v5z"></path></svg>
+      </div>
+        <h1 class="font-bold text-2xl">
+          Escuela 25 de Septiembre
+        </h1>
+    </article>
+
+    <p class="text-sm">
+      6ta calle A 14-59 zona 7 colonia Quinta Samayoa
+    </p>
+  </section>
+
   <nav>
     <ul class="flex flex-row gap-8">
-      <li><a href="/">Inicio</a></li>
-      <li><a href="/posts">Publicaciones</a></li>
-      <li><a href="/announcements">Anuncios</a></li>
-      <li><a href="/meetings">Convocatorias</a></li>
-      <li><a href="/schedules">Cronogramas</a></li>
-      <li><a href="/publish">Publicar</a></li>
+      {
+        contacts.map(({ name, Icon, link, label }) => (
+          <li>
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              {Icon}
+              <span class="sr-only">{name}</span>
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </nav>
 </footer>

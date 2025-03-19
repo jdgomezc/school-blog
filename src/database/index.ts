@@ -4,17 +4,31 @@ import type { Generated } from "kysely";
 
 const { Pool } = pkg;
 
-import { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD } from "../config";
+import { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD } from "../../config";
 
 interface Database {
-  // usuarios: {
-  //   usuario_id: Generated<number>;
-  //   fecha_creacion: Generated<Date>;
-  //   nombre: string;
-  //   apellido: string;
-  //   password: string;
-  //   username: string;
-  // };
+  user: {
+    id: Generated<number>;
+    name: string;
+    email: string;
+    emailVerified: boolean;
+    image: string;
+    createdAt: Date;
+    updatedAt: Date;
+    username: string;
+    surname: string;
+  };
+
+  post: {
+    post_id: Generated<number>;
+    usuario_id: number;
+    texto: string;
+    fecha_creacion: Generated<Date>;
+    imagen_url: string;
+    pdf_uri: string;
+    pdf_descarga: string;
+    tipo_publicacion: 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
+  }
 }
 
 const dialect = new PostgresDialect({

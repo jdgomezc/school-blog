@@ -1,1 +1,2 @@
-export * from './usuarios.service'
+export * from './posts.service'
+export * from './users.service'

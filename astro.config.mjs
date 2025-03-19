@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import node from "@astrojs/node";
 import dotenv from "dotenv";
+import icon from "astro-icon";
 
 import react from "@astrojs/react";
 
@@ -19,5 +20,14 @@ export default defineConfig({
   }),
 
   output: "server",
-  integrations: [react()],
+  integrations: [
+      react(),
+      icon({
+        include: {
+          mdi: ["*", "account"], // Load the entire Material Design Icon set or specific icons
+        },
+      }),
+  ],
+
+
 });

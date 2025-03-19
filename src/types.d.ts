@@ -10,6 +10,15 @@ declare global {
     role: string;
     image: string;
   }
+
+  interface Post {
+    id: string;
+    title: string;
+    content: string;
+    date: Date;
+    type: 'post' | 'announcement' | 'meeting' | 'schedule';
+    author: Author;
+  }
 }
 
 export {};

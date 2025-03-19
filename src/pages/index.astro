@@ -7,7 +7,7 @@ import bessie from "@/assets/bessie.jpeg"
 
 const posts: Post[] = [
 	{
-		id: "2",
+		id: "1",
 		title: "Reunión de padres y maestros",
 		content: "Les recordamos que este viernes tendremos la reunión de padres y maestros a las 5:00 PM en el salón principal. ¡Esperamos verlos allí!",
 		date: new Date("2023-10-20"),
@@ -20,7 +20,7 @@ const posts: Post[] = [
 		}
 	},
 	{
-		id: "3",
+		id: "2",
 		title: "Nuevo horario de clases",
 		content: "A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela.",
 		date: new Date("2023-10-18"),
@@ -33,7 +33,7 @@ const posts: Post[] = [
 		}
 	},
 	{
-		id: "4",
+		id: "3",
 		title: "Concurso de poesía",
 		content: "¡Anímense a participar en nuestro concurso de poesía! El tema de este año es 'La naturaleza y yo'. La fecha límite para entregar los poemas es el 30 de octubre.",
 		date: new Date("2023-10-15"),
@@ -46,7 +46,7 @@ const posts: Post[] = [
 		}
 	},
 	{
-		id: "5",
+		id: "4",
 		title: "Excursión al museo",
 		content: "El próximo miércoles, los estudiantes de quinto grado visitarán el museo de ciencias. Por favor, asegúrense de que sus hijos lleven ropa cómoda y un almuerzo.",
 		date: new Date("2023-10-22"),
@@ -59,7 +59,7 @@ const posts: Post[] = [
 		}
 	},
 	{
-		id: "6",
+		id: "5",
 		title: "Feria del libro",
 		content: "No se pierdan nuestra feria del libro este fin de semana. Habrá descuentos especiales y actividades para los niños. ¡Los esperamos!",
 		date: new Date("2023-10-25"),
@@ -72,7 +72,7 @@ const posts: Post[] = [
 		}
 	},
 	{
-		id: "2",
+		id: "6",
 		title: "Reunión de padres y maestros",
 		content: "Les recordamos que este viernes tendremos la reunión de padres y maestros a las 5:00 PM en el salón principal. ¡Esperamos verlos allí!",
 		date: new Date("2023-10-20"),
@@ -85,7 +85,7 @@ const posts: Post[] = [
 		}
 	},
 	{
-		id: "3",
+		id: "7",
 		title: "Nuevo horario de clases",
 		content: "A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela.",
 		date: new Date("2023-10-18"),
@@ -98,7 +98,7 @@ const posts: Post[] = [
 		}
 	},
 	{
-		id: "4",
+		id: "8",
 		title: "Concurso de poesía",
 		content: "¡Anímense a participar en nuestro concurso de poesía! El tema de este año es 'La naturaleza y yo'. La fecha límite para entregar los poemas es el 30 de octubre.",
 		date: new Date("2023-10-15"),
@@ -111,7 +111,7 @@ const posts: Post[] = [
 		}
 	},
 	{
-		id: "5",
+		id: "9",
 		title: "Excursión al museo",
 		content: "El próximo miércoles, los estudiantes de quinto grado visitarán el museo de ciencias. Por favor, asegúrense de que sus hijos lleven ropa cómoda y un almuerzo.",
 		date: new Date("2023-10-22"),
@@ -129,7 +129,7 @@ const posts: Post[] = [
 
 <Layout home="true">
 	<ImagesCarousel client:load />
-	<article class="px-24 py-16 grid grid-cols-3 gap-y-12 w-full justify-items-center">
+	<article class="px-24 py-16 grid grid-cols-3 gap-y-16 w-full justify-items-center">
 		{
 			posts.map(({id, title, content, date, type, author}) => (
 				<Post

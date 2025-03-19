@@ -1,7 +1,145 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Post from "../components/Post.astro";
+
+import bessie from "../assets/bessie.jpeg"
+
+const posts: Post[] = [
+	{
+		id: "1",
+		title: "Reunión de padres y maestros",
+		content: "Les recordamos que este viernes tendremos la reunión de padres y maestros a las 5:00 PM en el salón principal. ¡Esperamos verlos allí!",
+		date: new Date("2023-10-20"),
+		type: "meeting",
+		author: {
+			id: "1",
+			name: "Seño Bessie",
+			role: "Directora",
+			image: bessie.src
+		}
+	},
+	{
+		id: "2",
+		title: "Nuevo horario de clases",
+		content: "A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela.",
+		date: new Date("2023-10-18"),
+		type: "schedule",
+		author: {
+			id: "2",
+			name: "Profesor Juan",
+			role: "Coordinador Académico",
+			image: bessie.src
+		}
+	},
+	{
+		id: "3",
+		title: "Concurso de poesía",
+		content: "¡Anímense a participar en nuestro concurso de poesía! El tema de este año es 'La naturaleza y yo'. La fecha límite para entregar los poemas es el 30 de octubre.",
+		date: new Date("2023-10-15"),
+		type: "announcement",
+		author: {
+			id: "3",
+			name: "Seño María",
+			role: "Profesora de Literatura",
+			image: bessie.src
+		}
+	},
+	{
+		id: "4",
+		title: "Excursión al museo",
+		content: "El próximo miércoles, los estudiantes de quinto grado visitarán el museo de ciencias. Por favor, asegúrense de que sus hijos lleven ropa cómoda y un almuerzo.",
+		date: new Date("2023-10-22"),
+		type: "post",
+		author: {
+			id: "4",
+			name: "Profesor Carlos",
+			role: "Profesor de Ciencias",
+			image: bessie.src
+		}
+	},
+	{
+		id: "5",
+		title: "Feria del libro",
+		content: "No se pierdan nuestra feria del libro este fin de semana. Habrá descuentos especiales y actividades para los niños. ¡Los esperamos!",
+		date: new Date("2023-10-25"),
+		type: "announcement",
+		author: {
+			id: "1",
+			name: "Seño Bessie",
+			role: "Directora",
+			image: bessie.src
+		}
+	},
+	{
+		id: "6",
+		title: "Reunión de padres y maestros",
+		content: "Les recordamos que este viernes tendremos la reunión de padres y maestros a las 5:00 PM en el salón principal. ¡Esperamos verlos allí!",
+		date: new Date("2023-10-20"),
+		type: "meeting",
+		author: {
+			id: "1",
+			name: "Seño Bessie",
+			role: "Directora",
+			image: bessie.src
+		}
+	},
+	{
+		id: "7",
+		title: "Nuevo horario de clases",
+		content: "A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela.",
+		date: new Date("2023-10-18"),
+		type: "schedule",
+		author: {
+			id: "2",
+			name: "Profesor Juan",
+			role: "Coordinador Académico",
+			image: bessie.src
+		}
+	},
+	{
+		id: "8",
+		title: "Concurso de poesía",
+		content: "¡Anímense a participar en nuestro concurso de poesía! El tema de este año es 'La naturaleza y yo'. La fecha límite para entregar los poemas es el 30 de octubre.",
+		date: new Date("2023-10-15"),
+		type: "announcement",
+		author: {
+			id: "3",
+			name: "Seño María",
+			role: "Profesora de Literatura",
+			image: bessie.src
+		}
+	},
+	{
+		id: "9",
+		title: "Excursión al museo",
+		content: "El próximo miércoles, los estudiantes de quinto grado visitarán el museo de ciencias. Por favor, asegúrense de que sus hijos lleven ropa cómoda y un almuerzo.",
+		date: new Date("2023-10-22"),
+		type: "post",
+		author: {
+			id: "4",
+			name: "Profesor Carlos",
+			role: "Profesor de Ciencias",
+			image: bessie.src
+		}
+	},
+];
 ---
 
 <Layout>
-	<h1>ANUNCIOS</h1>
+	<article class="px-24 py-16 grid grid-cols-3 gap-y-16 w-full justify-items-center">
+		{
+			posts
+				.filter(({type}) => type === 'announcement')
+				.map(({id, title, content, date, type, author}) => (
+					<Post
+						id={id}
+						title={title}
+						content={content}
+						date={date}
+						type={type}
+						author={author}
+					/>
+				))
+		}
+	</article>
 </Layout>

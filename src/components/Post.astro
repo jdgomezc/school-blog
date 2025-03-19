@@ -34,20 +34,16 @@ const post_types: Record<string, string> = {
 }
 
 let border_color: string;
-let icon: string;
 
 switch (type) {
     case 'announcement':
         border_color = "border-[#FFA7A7]"
-        icon = "campaign"
         break;
     case 'meeting':
         border_color = "border-[#FFCC91]"
-        icon = "hand"
         break;
     case 'schedule':
         border_color = "border-[#8194FF]"
-        icon = "dashboard"
         break;
     default:
         border_color = "border-[#ccc]"
@@ -56,7 +52,7 @@ switch (type) {
 
 ---
 
-<article class={`bg-[#eee] rounded-lg p-4 pt-8 border-1 w-96 h-72 justify-between flex flex-col relative hover:scale-105 duration-300 ease-in-out cursor-pointer ${border_color}`}>
+<a href={`/post/${id}`} class={`bg-[#eee] rounded-lg p-4 pt-8 border-1 w-96 h-72 justify-between flex flex-col relative hover:scale-105 duration-300 ease-in-out cursor-pointer ${border_color}`}>
     <!--absolute label-->
     <div class={`flex flex-row gap-1 absolute -top-4 left-4 bg-[#eee] rounded-md border-1 px-2 py-1 ${border_color}`}>
         <p>{post_types[type]}</p>
@@ -100,4 +96,4 @@ switch (type) {
             LEER MÁS >
         </button>
     </section>
-</article>
+</a>

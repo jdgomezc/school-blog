@@ -1,0 +1,232 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+import bessie from "@/assets/bessie.jpeg"
+
+export const prerender = true;
+
+interface Props {
+    post: Post;
+}
+
+// can be async function to fetch data from an API
+export function getStaticPaths() {
+    const posts: Post[] = [
+        {
+            id: "1",
+            title: "Reunión de padres y maestros",
+            content: "Les recordamos que este viernes tendremos la reunión de padres y maestros a las 5:00 PM en el salón principal. ¡Esperamos verlos allí!",
+            date: new Date("2023-10-20"),
+            type: "meeting",
+            author: {
+                id: "1",
+                name: "Seño Bessie",
+                role: "Directora",
+                image: bessie.src
+            }
+        },
+        {
+            id: "2",
+            title: "Nuevo horario de clases",
+            content: "A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela.",
+            date: new Date("2023-10-18"),
+            type: "schedule",
+            author: {
+                id: "2",
+                name: "Profesor Juan",
+                role: "Coordinador Académico",
+                image: bessie.src
+            }
+        },
+        {
+            id: "3",
+            title: "Concurso de poesía",
+            content: "¡Anímense a participar en nuestro concurso de poesía! El tema de este año es 'La naturaleza y yo'. La fecha límite para entregar los poemas es el 30 de octubre.",
+            date: new Date("2023-10-15"),
+            type: "announcement",
+            author: {
+                id: "3",
+                name: "Seño María",
+                role: "Profesora de Literatura",
+                image: bessie.src
+            }
+        },
+        {
+            id: "4",
+            title: "Excursión al museo",
+            content: "El próximo miércoles, los estudiantes de quinto grado visitarán el museo de ciencias. Por favor, asegúrense de que sus hijos lleven ropa cómoda y un almuerzo.",
+            date: new Date("2023-10-22"),
+            type: "post",
+            author: {
+                id: "4",
+                name: "Profesor Carlos",
+                role: "Profesor de Ciencias",
+                image: bessie.src
+            }
+        },
+        {
+            id: "5",
+            title: "Feria del libro",
+            content: "No se pierdan nuestra feria del libro este fin de semana. Habrá descuentos especiales y actividades para los niños. ¡Los esperamos!",
+            date: new Date("2023-10-25"),
+            type: "announcement",
+            author: {
+                id: "1",
+                name: "Seño Bessie",
+                role: "Directora",
+                image: bessie.src
+            }
+        },
+        {
+            id: "6",
+            title: "Reunión de padres y maestros",
+            content: "Les recordamos que este viernes tendremos la reunión de padres y maestros a las 5:00 PM en el salón principal. ¡Esperamos verlos allí!",
+            date: new Date("2023-10-20"),
+            type: "meeting",
+            author: {
+                id: "1",
+                name: "Seño Bessie",
+                role: "Directora",
+                image: bessie.src
+            }
+        },
+        {
+            id: "7",
+            title: "Nuevo horario de clases",
+            content: "A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela.",
+            date: new Date("2023-10-18"),
+            type: "schedule",
+            author: {
+                id: "2",
+                name: "Profesor Juan",
+                role: "Coordinador Académico",
+                image: bessie.src
+            }
+        },
+        {
+            id: "8",
+            title: "Concurso de poesía",
+            content: "¡Anímense a participar en nuestro concurso de poesía! El tema de este año es 'La naturaleza y yo'. La fecha límite para entregar los poemas es el 30 de octubre.",
+            date: new Date("2023-10-15"),
+            type: "announcement",
+            author: {
+                id: "3",
+                name: "Seño María",
+                role: "Profesora de Literatura",
+                image: bessie.src
+            }
+        },
+        {
+            id: "9",
+            title: "Excursión al museo",
+            content: "El próximo miércoles, los estudiantes de quinto grado visitarán el museo de ciencias. Por favor, asegúrense de que sus hijos lleven ropa cómoda y un almuerzo.",
+            date: new Date("2023-10-22"),
+            type: "post",
+            author: {
+                id: "4",
+                name: "Profesor Carlos",
+                role: "Profesor de Ciencias",
+                image: bessie.src
+            }
+        },
+    ];
+    return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+const { id } = Astro.params;
+const { post } = Astro.props;
+
+const { title, content, date, type, author } = post;
+
+let border_color: string;
+
+switch (type) {
+    case 'announcement':
+        border_color = "border-[#FFA7A7]"
+        break;
+    case 'meeting':
+        border_color = "border-[#FFCC91]"
+        break;
+    case 'schedule':
+        border_color = "border-[#8194FF]"
+        break;
+    default:
+        border_color = "border-[#ccc]"
+        break;
+}
+
+// dictionary with translation to spanish of the post types
+const post_types: Record<string, string> = {
+    post: 'Publicación',
+    announcement: 'Anuncio',
+    meeting: 'Convocatoria',
+    schedule: 'Cronograma'
+}
+
+const months: string[] = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre'
+]
+
+---
+
+<Layout>
+    <article class="px-40">
+        <!--back anchor-->
+        <button onclick="history.back()" type="button" class="flex flex-row gap-2 cursor-pointer p-2 rounded-lg mb-8 w-fit select-none hover:bg-zinc-100 focus:bg-zinc-200 transition-all ease-in-out duration-200">
+            <svg width={24} height={24} viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-linejoin="round" stroke-width={4} d="M44 40.836q-7.34-8.96-13.036-10.168t-10.846-.365V41L4 23.545L20.118 7v10.167q9.523.075 16.192 6.833q6.668 6.758 7.69 16.836Z" clip-rule="evenodd"></path></svg>
+            <span class="text-xl">Regresar</span>
+        </button>
+        <h1 class={`text-7xl pb-4 font-bold border-b-1 mb-8 ${border_color}`}>{title}</h1>
+        <section class="flex flex-col mb-16">
+            <article class="flex flex-row gap-2">
+                <p class="text-3xl font-light">{post_types[type]}</p>
+                <div class="my-auto">
+                    {
+                        type === 'post' ? (
+                                <svg width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm2 4v2h10V7H7zm0 4v2h10v-2H7zm0 4v2h7v-2H7z" fill="currentColor"/></svg>
+                        ) : (
+                            type == 'announcement' ? (
+                                    <svg width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path fill="currentColor" d="M12 8H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h1v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h3l5 4V4zm9.5 4c0 1.71-.96 3.26-2.5 4V8c1.53.75 2.5 2.3 2.5 4"/></svg>
+                            ) : (
+                                type == 'meeting' ? (
+                                        <svg width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path fill="currentColor" d="M3 16V5.75a1.25 1.25 0 0 1 2.5 0V12h1V2.75a1.25 1.25 0 0 1 2.5 0V12h1V1.25a1.25 1.25 0 0 1 2.5 0V12h1V3.25a1.25 1.25 0 0 1 2.5 0V15h.75l1.41-3.53c.22-.55.68-.97 1.24-1.16l.79-.26a1 1 0 0 1 1.24 1.32L18.4 19c-1.21 3-4.14 5-7.4 5c-4.42 0-8-3.58-8-8"/></svg>
+                                ) : (
+                                        <svg width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path fill="currentColor" d="M13 3v6h8V3m-8 18h8V11h-8M3 21h8v-6H3m0-2h8V3H3z"/></svg>
+                                )
+                            )
+                        )
+                    }
+                </div>
+            </article>
+            <p class="text-lg text-zinc-400">
+                <!--get the date in the spanish format: Mar 3, 2025-->
+                {months[date.getMonth()]} {date.getDate()}, {date.getFullYear()}
+            </p>
+        </section>
+        <section class="flex flex-col gap-12">
+            <article class="flex flex-row justify-between">
+                <article class="flex flex-row gap-2">
+                    <img src={author.image} alt={author.name} class="w-18 h-18 rounded-full" />
+                    <section class="my-auto">
+                        <h2 class="leading-none text-2xl font-bold">{author.name}</h2>
+                        <p class="text-xl text-zinc-500">{author.role}</p>
+                    </section>
+                </article>
+            </article>
+            <p class="text-4xl leading-14">
+                {content}
+            </p>
+        </section>
+    </article>
+</Layout>

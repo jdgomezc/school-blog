@@ -21,7 +21,7 @@ import school_10 from "@/assets/school_10.jpeg"
 
 export default function ImagesCarousel() {
 
-    const height = "h-[30rem]"
+    const height = "h-[40rem]"
 
     const images = [
         school_1,
@@ -51,7 +51,7 @@ export default function ImagesCarousel() {
             <CarouselContent>
                 {images.map(({ src }, i) => (
                     <CarouselItem key={i}>
-                        <div className="">
+                        <div className="select-none">
                             <Card className={"p-0 border-0"}>
                                 <CardContent className={`flex aspect-square items-center justify-center p-0 ${height}`}>
                                     <img src={src} alt={`image_${i+1}`} className="w-full h-full object-cover" draggable="false" />

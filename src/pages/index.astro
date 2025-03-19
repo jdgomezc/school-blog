@@ -1,7 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ImagesCarousel from "../components/ImagesCarousel"
 ---
 
-<Layout>
-	<slot />
+<Layout home="true">
+	<ImagesCarousel client:load />
 </Layout>

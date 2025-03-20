@@ -3,6 +3,43 @@ import Layout from '../layouts/Layout.astro';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { authClient } from "lib/auth-client";
+
+export const prerender = false;
+
+if (Astro.request.method === 'POST') {
+    const data = await Astro.request.formData();
+
+    const username = data.get('username') as string;
+    const password = data.get('password') as string;
+        
+    console.log("Username: ", username, "Password: ", password);
+    
+    try {
+        const result = await authClient.signIn.email({email: username, password});
+        console.log("Result: ", result);
+
+        if (result.error) {
+            console.log(result.error);
+            return;
+        }
+
+        console.log("login successful", result.data);
+
+        console.log("User logged: ", Astro.locals.user);
+        console.log("User session: ", Astro.locals.session);
+
+        return Astro.redirect('/posts')
+    } catch (error) {
+        console.error("Error: ", error);
+
+        console.log("Ocurrió un error al iniciar sesión. Por favor, intenta de nuevo.");
+    }
+}
+
+export async function handleLogin(formData: FormData) {
+    
+}
 ---
 
 <Layout>
@@ -13,19 +50,19 @@ import { Label } from "@/components/ui/label";
             Ingresa tus credenciales para poder publicar.
         </p>
         <div class="rounded-lg bg-white p-6 shadow-md border border-gray-300 h-64">
-            <form class="space-y-4 h-full flex flex-col">
+            <form method="POST" class="space-y-4 h-full flex flex-col">
                 <div>
-                    <Label htmlFor="username" className='mb-2 block'>Nombre de usuario</Label>
-                    <Input id="username" type="text" placeholder="Ingresa tu nombre de usuario" />
+                    <Label className='mb-2 block'>Nombre de usuario</Label>
+                    <Input name="username" type="text" placeholder="Ingresa tu nombre de usuario" required/>
                 </div>
 
                 <div>
-                    <Label htmlFor="password" className='mb-2 block'>Contraseña</Label>
-                    <Input id="password" type="password" placeholder="Ingresa tu contraseña" />
+                    <Label className='mb-2 block'>Contraseña</Label>
+                    <Input name="password" type="password" placeholder="Ingresa tu contraseña" required/>
                 </div>
 
                 <div class="flex flex-col justify-between items-center gap-3 mt-auto w-full">
-                    <Button className="w-full flex" onClick={undefined}>
+                    <Button className="w-full flex" type='submit'>
                         Iniciar sesión
                     </Button>
                     <a href="#" class="text-xs text-blue-400 hover:underline">

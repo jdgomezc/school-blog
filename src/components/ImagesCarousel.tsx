@@ -21,7 +21,7 @@ import school_10 from "@/assets/school_10.jpeg"
 
 export default function ImagesCarousel() {
 
-    const height = "h-[40rem]"
+    const height = "h-96 2xl:h-[40rem]"
 
     const images = [
         school_1,

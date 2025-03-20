@@ -14,7 +14,7 @@ export function getStaticPaths() {
     const posts: Post[] = [
         {
             id: "1",
-            title: "Reunión de padres y maestros",
+            title: "Reunión de padres y maestros para entrega de notas del año 2025",
             content: "Les recordamos que este viernes tendremos la reunión de padres y maestros a las 5:00 PM en el salón principal. ¡Esperamos verlos allí!",
             date: new Date("2023-10-20"),
             type: "meeting",
@@ -28,7 +28,7 @@ export function getStaticPaths() {
         {
             id: "2",
             title: "Nuevo horario de clases",
-            content: "A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela.",
+            content: "A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela.A partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuelaA partir de la próxima semana, el horario de clases cambiará. Por favor, revisen el nuevo horario en la página web de la escuela",
             date: new Date("2023-10-18"),
             type: "schedule",
             author: {
@@ -183,14 +183,16 @@ const months: string[] = [
 <Layout>
     <article class="px-40">
         <!--back anchor-->
-        <button onclick="history.back()" type="button" class="flex flex-row gap-2 cursor-pointer p-2 rounded-lg mb-8 w-fit select-none hover:bg-zinc-100 focus:bg-zinc-200 transition-all ease-in-out duration-200">
-            <svg width={24} height={24} viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-linejoin="round" stroke-width={4} d="M44 40.836q-7.34-8.96-13.036-10.168t-10.846-.365V41L4 23.545L20.118 7v10.167q9.523.075 16.192 6.833q6.668 6.758 7.69 16.836Z" clip-rule="evenodd"></path></svg>
-            <span class="text-xl">Regresar</span>
+        <button onclick="history.back()" type="button" class="flex flex-row gap-2 cursor-pointer p-2 rounded-lg mb-2 2xl:mb-8 w-fit select-none hover:bg-zinc-100 focus:bg-zinc-200 transition-all ease-in-out duration-200">
+            <div class="my-auto">
+                <svg width={20} height={20} viewBox="0 0 48 48"><path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-linejoin="round" stroke-width={4} d="M44 40.836q-7.34-8.96-13.036-10.168t-10.846-.365V41L4 23.545L20.118 7v10.167q9.523.075 16.192 6.833q6.668 6.758 7.69 16.836Z" clip-rule="evenodd"></path></svg>
+            </div>
+            <span class="text-lg 2xl:text-xl">Regresar</span>
         </button>
-        <h1 class={`text-7xl pb-4 font-bold border-b-1 mb-8 ${border_color}`}>{title}</h1>
-        <section class="flex flex-col mb-16">
+        <h1 class={`text-4xl 2xl:text-7xl pb-1 2xl:pb-4 font-bold border-b-1 mb-2 2xl:mb-8 ${border_color}`}>{title}</h1>
+        <section class="flex flex-col mb-4 2xl:mb-16">
             <article class="flex flex-row gap-2">
-                <p class="text-3xl font-light">{post_types[type]}</p>
+                <p class="text-xl 2xl:text-3xl font-light">{post_types[type]}</p>
                 <div class="my-auto">
                     {
                         type === 'post' ? (
@@ -209,22 +211,22 @@ const months: string[] = [
                     }
                 </div>
             </article>
-            <p class="text-lg text-zinc-400">
+            <p class="text-md 2xl:text-lg text-zinc-400">
                 <!--get the date in the spanish format: Mar 3, 2025-->
                 {months[date.getMonth()]} {date.getDate()}, {date.getFullYear()}
             </p>
         </section>
-        <section class="flex flex-col gap-12">
+        <section class="flex flex-col gap-4 mb-4 2xl:mb-0 2xl:gap-12">
             <article class="flex flex-row justify-between">
                 <article class="flex flex-row gap-2">
-                    <img src={author.image} alt={author.name} class="w-18 h-18 rounded-full" />
+                    <img src={author.image} alt={author.name} class="w-12 2xl:w-18 h-12 2xl:h-18 rounded-full" />
                     <section class="my-auto">
-                        <h2 class="leading-none text-2xl font-bold">{author.name}</h2>
-                        <p class="text-xl text-zinc-500">{author.role}</p>
+                        <h2 class="leading-none text-md 2xl:text-2xl font-bold">{author.name}</h2>
+                        <p class="text-sm 2xl:text-xl text-zinc-500">{author.role}</p>
                     </section>
                 </article>
             </article>
-            <p class="text-4xl leading-14">
+            <p class="text-xl 2xl:text-4xl leading-8 2xl:leading-14">
                 {content}
             </p>
         </section>

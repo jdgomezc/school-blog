@@ -1,14 +1,14 @@
 import { google } from 'googleapis'
 import { Readable } from 'stream';
 
-import { authorize } from "config";
-import { IMG_FOLDER, PDF_FOLDER } from "config"
+import { authorize } from "@/config";
+import { IMG_FOLDER, PDF_FOLDER } from "@/config"
 
 export const ArchivosController = {
   async getFiles() {
       try {
-        const authClient = await authorize()
-        const drive = google.drive({ version: 'v3', auth: authClient })
+        const authGoogleClient = await authorize()
+        const drive = google.drive({ version: 'v3', auth: authGoogleClient })
     
         const files = await drive.files.list({
           q: `'${PDF_FOLDER}' in parents`, 
@@ -36,8 +36,8 @@ export const ArchivosController = {
           return new Response(JSON.stringify({ error: "No file data found in request" }), { status: 400 })
       }
   
-      const authClient = await authorize();
-      const drive = google.drive({ version: 'v3', auth: authClient });
+      const authGoogleClient = await authorize();
+      const drive = google.drive({ version: 'v3', auth: authGoogleClient });
   
       const stream = Readable.from(Buffer.from(binaryData));
   

@@ -1,2 +1,2 @@
-export * from './archivos.controller'
 export * from './posts.controller'
+export * from './archivos.controller'

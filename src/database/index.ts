@@ -4,7 +4,7 @@ import type { Generated } from "kysely";
 
 const { Pool } = pkg;
 
-import { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD } from "../../config";
+import { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD } from "../config";
 
 interface Database {
   user: {

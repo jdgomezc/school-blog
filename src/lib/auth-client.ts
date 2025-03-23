@@ -1,9 +1,9 @@
 import { createAuthClient } from "better-auth/client"
 import { usernameClient, inferAdditionalFields } from "better-auth/client/plugins"
 
-import { BETTER_AUTH_URL } from "../config"
+// import { BETTER_AUTH_URL } from "../config"
 
-export const authClient = createAuthClient({
+const authClient = createAuthClient({
     emailAndPassword: {
         enabled: true
     },
@@ -17,5 +17,7 @@ export const authClient = createAuthClient({
             }
         })
     ],
-    baseURL: BETTER_AUTH_URL
+    baseURL: "http://localhost:4321"
 })
+
+export default authClient

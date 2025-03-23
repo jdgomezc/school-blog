@@ -5,13 +5,13 @@ const SCOPES = ['https://www.googleapis.com/auth/drive']
 export async function authorize() {
 
   try {
-    const authClient = new JWT({ // Use JWT directly
+    const authGoogleClient = new JWT({ // Use JWT directly
       keyFile: "./service_account.json",
       scopes: SCOPES,
     });
 
-    await authClient.authorize(); // Authorize the client
-    return authClient; // Return the JWT client
+    await authGoogleClient.authorize(); // Authorize the client
+    return authGoogleClient; // Return the JWT client
   } catch (error) {
     console.error('Error authorizing with service account:', error)
     throw error

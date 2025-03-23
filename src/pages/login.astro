@@ -3,74 +3,92 @@ import Layout from '../layouts/Layout.astro';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { authClient } from "lib/auth-client";
-
-export const prerender = false;
-
-if (Astro.request.method === 'POST') {
-    const data = await Astro.request.formData();
-
-    const username = data.get('username') as string;
-    const password = data.get('password') as string;
-        
-    console.log("Username: ", username, "Password: ", password);
-    
-    try {
-        const result = await authClient.signIn.email({email: username, password});
-        console.log("Result: ", result);
-
-        if (result.error) {
-            console.log(result.error);
-            return;
-        }
-
-        console.log("login successful", result.data);
-
-        console.log("User logged: ", Astro.locals.user);
-        console.log("User session: ", Astro.locals.session);
-
-        return Astro.redirect('/posts')
-    } catch (error) {
-        console.error("Error: ", error);
-
-        console.log("Ocurrió un error al iniciar sesión. Por favor, intenta de nuevo.");
-    }
-}
-
-export async function handleLogin(formData: FormData) {
-    
-}
 ---
 
 <Layout>
 <div class="flex-1 grid place-items-center">
-    <div class="max-w-md px-4">
-        <h1 class="text-2xl font-bold mb-2 text-center">Iniciar sesión</h1>
-        <p class="text-gray-600 mb-6 text-center">
-            Ingresa tus credenciales para poder publicar.
-        </p>
-        <div class="rounded-lg bg-white p-6 shadow-md border border-gray-300 h-64">
-            <form method="POST" class="space-y-4 h-full flex flex-col">
-                <div>
-                    <Label className='mb-2 block'>Nombre de usuario</Label>
-                    <Input name="username" type="text" placeholder="Ingresa tu nombre de usuario" required/>
-                </div>
+    {
+        Astro.locals.session ? (
+            <div>
+                <p>You are already logged in</p>
+                <button id="logout-button">Logout</button>
+            </div>
+        ) : (
+            <div class="max-w-md px-4">
+                <h1 class="text-2xl font-bold mb-2 text-center">Iniciar sesión</h1>
+                <p class="text-gray-600 mb-6 text-center">
+                    Ingresa tus credenciales para poder publicar.
+                </p>
+                <div class="rounded-lg bg-white p-6 shadow-md border border-gray-300 h-64">
+                    <form id="login-form" class="space-y-4 h-full flex flex-col">
+                        <div>
+                            <Label className='mb-2 block'>Nombre de usuario</Label>
+                            <Input id="username" type="text" placeholder="Ingresa tu nombre de usuario" required/>
+                        </div>
 
-                <div>
-                    <Label className='mb-2 block'>Contraseña</Label>
-                    <Input name="password" type="password" placeholder="Ingresa tu contraseña" required/>
-                </div>
+                        <div>
+                            <Label className='mb-2 block'>Contraseña</Label>
+                            <Input id="password" type="password" placeholder="Ingresa tu contraseña" required/>
+                        </div>
 
-                <div class="flex flex-col justify-between items-center gap-3 mt-auto w-full">
-                    <Button className="w-full flex" type='submit'>
-                        Iniciar sesión
-                    </Button>
-                    <a href="#" class="text-xs text-blue-400 hover:underline">
-                        ¿Olvidaste tu contraseña?
-                    </a>
+                        <div class="flex flex-col justify-between items-center gap-3 mt-auto w-full">
+                            <Button className="w-full flex" type='submit'>
+                                Iniciar sesión
+                            </Button>
+                            <a href="#" class="text-xs text-blue-400 hover:underline">
+                                ¿Olvidaste tu contraseña?
+                            </a>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
+        )
+    }
+    
 </div>
+
+
+<script>
+    import authClient from '../lib/auth-client';
+
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+
+    document.getElementById("login-form")?.addEventListener("submit", async () => {
+        event?.preventDefault();
+
+        console.log("Login button clicked");
+
+        const username = usernameInput?.value;
+
+        console.log("Username: ", username);
+
+        const password = passwordInput?.value;
+
+        console.log("Password: ", password);
+
+        try {
+            const result = await authClient.signIn.email({
+                email: username,
+                password: password,
+            }); 
+            
+            if (result.error) {
+                console.error("Error: ", result.error.message);
+                return;
+            }
+
+            console.log("Login successful");
+
+            window.location.href = "/posts";
+        } catch (error) {
+            console.log("Ocurrió un error al iniciar sesión. Por favor, intenta de nuevo.");   
+        }
+    });
+
+    document.getElementById("logout-button")?.addEventListener("click", async () => {
+        await authClient.signOut();
+        window.location.href = "/login";
+    });
+</script>
 </Layout>

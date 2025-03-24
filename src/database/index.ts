@@ -20,14 +20,14 @@ interface Database {
   };
 
   post: {
-    post_id: Generated<number>;
+    id: Generated<number>;
     usuario_id: number;
-    texto: string;
-    fecha_creacion: Generated<Date>;
-    imagen_url: string;
-    pdf_uri: string;
-    pdf_descarga: string;
-    tipo_publicacion: 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
+    title: string;
+    date: Generated<Date>;
+    description: string;
+    file_url: string;
+    file_download_url: string;
+    type: 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
   }
 }
 

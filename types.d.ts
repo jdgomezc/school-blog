@@ -2,11 +2,11 @@
 
 declare global {
   interface PostAPublicar {
-    texto: string;
-    imagenUrl: string;
-    pdfUri: string;
-    pdfDescarga: string;
-    tipoPublicacion: 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
+    title: string;
+    description: string;
+    file_url: string;
+    file_download_url: string;
+    type: 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
   }
 }
 

@@ -11,14 +11,21 @@ export const PostsController = {
         }
     },
 
-    async agregarPost(request: Request, username: string) {
+    async addPost(request: Request) {
         try {
-            const user = await getUserId(username);
-            const newPost = await request.json();
+            const body = await request.json();
+            const user = await getUserId(body.email);
             if (!user){
                 return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
             }
-            const post = await agregarPost(user.id, newPost);
+            const newPost = {
+                title: body.title,
+                description: body.description,
+                file_url: body.file_url,
+                file_download_url: body.file_download_url,
+                type: body.type,
+            };
+            const post = agregarPost(user.id, newPost);
             return new Response(JSON.stringify(post), { status: 200 });           
         } catch (error) {
             return new Response(JSON.stringify({ error: 'Error adding post' }), { status: 500 });

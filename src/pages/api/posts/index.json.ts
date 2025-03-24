@@ -7,5 +7,5 @@ export const GET: APIRoute = async () => {
 }
 
 export const POST: APIRoute = async ({ request }) => {
-    return PostsController.getPosts()
+    return PostsController.addPost(request)
 }

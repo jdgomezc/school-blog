@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Upload, Send } from "lucide-react";
+
+const userEmail = Astro.locals.user?.email;
 ---
 
 <Layout>
@@ -21,15 +23,16 @@ import { Upload, Send } from "lucide-react";
 
         <CardContent className="p-0 h-72 flex flex-col">
           <div class="flex flex-col gap-2">
-            <Input placeholder="Título" className="px-2 py-4 border rounded-sm !text-lg" />
-            <Textarea placeholder="Descripción" className="p-2 border rounded-sm text-sm resize-none h-36 !text-lg" rows={15} />
+            <Input id="title" placeholder="Título" className="px-2 py-4 border rounded-sm !text-lg" />
+            <Textarea id="description" placeholder="Descripción" className="p-2 border rounded-sm text-sm resize-none h-36 !text-lg" rows={15} />
           </div>
 
           <div class="flex flex-col sm:flex-row justify-between items-center gap-2 mt-3 mt-auto">
             <Button variant="outline" className="flex items-center gap-2 w-full sm:w-auto text-sm">
-              <Upload size={14} /> Adjuntar archivo
+              <!-- <Upload id="input" size={14} /> Adjuntar archivo -->
+               <input type="file" id="input" />
             </Button>
-            <Button className="flex items-center gap-2 w-full sm:w-auto text-sm">
+            <Button id="publish-button" className="flex items-center gap-2 w-full sm:w-auto text-sm">
               <Send size={14} /> Publicar
             </Button>
           </div>
@@ -37,4 +40,77 @@ import { Upload, Send } from "lucide-react";
       </div>
     </Card>
   </div>
+
+  <script>
+    import authClient from '../lib/auth-client';
+    const fileTitle = document.getElementById('title');
+    const fileDescription = document.getElementById('description');
+    const fileInput = document.getElementById('input');
+
+    let fileUploaded: File | null = null;
+
+    fileInput?.addEventListener('change', async (e) => {
+          fileUploaded = (e.target as HTMLInputElement)?.files?.[0] || null;
+          
+          if (fileUploaded) {
+            console.log("File uploaded")
+          };
+        });
+    
+    document.getElementById('publish-button')?.addEventListener('click', async () => {
+      if (!fileUploaded) {
+        console.error('No file uploaded');
+        return;
+      }
+
+      const file_title = fileTitle?.value
+      const file_description = fileDescription?.value
+
+      if (!file_title || !file_description) {
+        console.error('Title or description missing');
+        return;
+      }
+
+      const post_type = "POST"
+
+      try {
+        const uploadedResult = await fetch('/api/files/index.json', {
+          method: 'POST',
+          body: fileUploaded,
+          headers: {
+            'x-file-name': fileUploaded.name,
+            'content-type': fileUploaded.type
+          }
+        });
+
+        if (!uploadedResult.ok) {
+          throw new Error('Upload of file failed');
+        }
+        
+        const fileResult = await uploadedResult.json();
+
+        const userEmail = await authClient.getSession();
+
+        const response = await fetch('/api/posts/index.json', {
+          method: 'POST',
+          body: JSON.stringify({
+            email: userEmail.data?.user.email,
+            title: file_title,
+            description: file_description,
+            file_url: fileResult.shareableLink,
+            file_download_url: fileResult.downloadLink,
+            type: post_type
+          }),
+        });
+
+        if (response.ok) {
+          console.log('File uploaded:', response);
+        } else {
+          throw new Error('Upload of post failed');
+        }
+      } catch (error) {
+        console.error('Upload error:', error);
+      }
+    });
+  </script>
 </Layout>

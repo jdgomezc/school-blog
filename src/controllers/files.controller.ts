@@ -4,7 +4,7 @@ import { Readable } from 'stream';
 import { authorize } from "@/config";
 import { IMG_FOLDER, PDF_FOLDER } from "@/config"
 
-export const ArchivosController = {
+export const FilesController = {
   async getFiles() {
       try {
         const authGoogleClient = await authorize()

@@ -7,6 +7,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Upload, Send } from "lucide-react";
 
 const userEmail = Astro.locals.user?.email;
+
+const post_type = "POST";
+const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
 ---
 
 <Layout>
@@ -15,9 +18,9 @@ const userEmail = Astro.locals.user?.email;
       <div class="p-4 flex flex-col h-full justify-between">
         <h1 class="text-lg font-bold text-center mb-3">Elige un tipo de publicación</h1>
 
-        <div class="flex flex-wrap justify-center gap-10 mb-3">
-          {['Publicaciones', 'Anuncios', 'Convocatorias', 'Cronogramas'].map((tipo) => (
-            <Button key={tipo} variant="outline" className="px-3 py-1 text-sm">{tipo}</Button>
+        <div id="post-type-btn" class="flex flex-wrap justify-center gap-10 mb-3">
+          {['Publicaciones', 'Anuncios', 'Convocatorias', 'Cronogramas'].map((tipo, index) => (
+            <Button datatype={post_types[index]} key={tipo} variant="outline" className="px-3 py-1 text-sm">{tipo}</Button>
           ))}
         </div>
 
@@ -46,7 +49,9 @@ const userEmail = Astro.locals.user?.email;
     const fileTitle = document.getElementById('title');
     const fileDescription = document.getElementById('description');
     const fileInput = document.getElementById('input');
+    const typeButtons = document.querySelectorAll('#post-type-btn button');
 
+    let post_type: PostType = "POST";
     let fileUploaded: File | null = null;
 
     fileInput?.addEventListener('change', async (e) => {
@@ -56,6 +61,21 @@ const userEmail = Astro.locals.user?.email;
             console.log("File uploaded")
           };
         });
+
+    typeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        typeButtons.forEach(btn => {
+          btn.classList.remove('bg-primary', 'text-primary-foreground');
+          btn.setAttribute('variant', 'outline');
+        });
+        
+        button.classList.add('bg-primary', 'text-primary-foreground');
+        button.setAttribute('variant', 'default');
+        
+        post_type = button.getAttribute('datatype') as PostType;
+        console.log(`Selected post type: ${post_type}`);
+      });
+    });
     
     document.getElementById('publish-button')?.addEventListener('click', async () => {
       if (!fileUploaded) {
@@ -70,8 +90,6 @@ const userEmail = Astro.locals.user?.email;
         console.error('Title or description missing');
         return;
       }
-
-      const post_type = "POST"
 
       try {
         const uploadedResult = await fetch('/api/files/index.json', {

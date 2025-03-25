@@ -5,8 +5,8 @@ declare global {
   }
 
   interface Author {
-    id: string;
     name: string;
+    surname: string;
     role: string;
     image: string;
   }
@@ -14,9 +14,11 @@ declare global {
   interface Post {
     id: string;
     title: string;
-    content: string;
+    description: string;
     date: Date;
     type: 'post' | 'announcement' | 'meeting' | 'schedule';
+    file_url: string;
+    file_download_url: string;
     author: Author;
   }
 }

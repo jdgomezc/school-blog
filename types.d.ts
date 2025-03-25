@@ -8,6 +8,8 @@ declare global {
     file_download_url: string;
     type: 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
   }
+
+  type PostType = 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
 }
 
 export {};

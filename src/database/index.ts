@@ -17,6 +17,7 @@ interface Database {
     updatedAt: Date;
     username: string;
     surname: string;
+    role: string;
   };
 
   post: {

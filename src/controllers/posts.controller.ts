@@ -1,9 +1,22 @@
-import { getPosts, agregarPost, getUserId } from "@/services";
+import { getPosts, agregarPost, getUserId, getPostsFiltered } from "@/services";
 
 export const PostsController = {
     async getPosts() {
         try {
             const posts = await getPosts();
+            console.log("Posts in post controller: ", posts);
+            return new Response(JSON.stringify(posts), { status: 200 });
+        } catch (error) {
+            console.error('Error getting posts:', error);
+            return new Response(JSON.stringify({ error: 'Error getting posts' }), { status: 500 });
+        }
+    },
+
+    async getPostsFiltered(request: Request) {
+        try {
+            const params = new URL(request.url).searchParams;
+            const type = params.get('type') as PostType;
+            const posts = await getPostsFiltered(type);
             return new Response(JSON.stringify(posts), { status: 200 });
         } catch (error) {
             console.error('Error getting posts:', error);

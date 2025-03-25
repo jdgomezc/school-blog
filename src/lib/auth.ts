@@ -20,8 +20,13 @@ export const auth = betterAuth({
       surname: {
         type: "string",
         required: false,
-        defaultValue: "user",
+        defaultValue: "apellido",
       },
+      role: {
+        type: "string",
+        required: false,
+        defaultValue: "rol",
+      }
     },
     deleteUser: { 
       enabled: true

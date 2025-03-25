@@ -111,6 +111,10 @@ const userEmail = Astro.locals.user?.email;
       } catch (error) {
         console.error('Upload error:', error);
       }
+
+      fileTitle.value = '';
+      fileDescription.value = '';
+      fileInput.value = '';
     });
   </script>
 </Layout>

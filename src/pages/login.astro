@@ -57,19 +57,12 @@ import { Label } from "@/components/ui/label";
     document.getElementById("login-form")?.addEventListener("submit", async () => {
         event?.preventDefault();
 
-        console.log("Login button clicked");
-
         const username = usernameInput?.value;
-
-        console.log("Username: ", username);
-
         const password = passwordInput?.value;
 
-        console.log("Password: ", password);
-
         try {
-            const result = await authClient.signIn.email({
-                email: username,
+            const result = await authClient.signIn.username({
+                username: username,
                 password: password,
             }); 
             

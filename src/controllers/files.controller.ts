@@ -16,8 +16,6 @@ export const FilesController = {
           supportsAllDrives: true
         })
 
-        console.log('Files:', files.data)
-
         return new Response(JSON.stringify(files.data), { status: 200 })
       } catch (error) {
         console.error('Error listing files:', error)

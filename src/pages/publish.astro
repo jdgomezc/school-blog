@@ -6,10 +6,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Upload, Send } from "lucide-react";
 
+if (!Astro.locals.session) {
+  return Astro.redirect('/login');
+}
+
+console.log("SESSION", Astro.locals.session);
+
 const userEmail = Astro.locals.user?.email;
 
 const post_type = "POST";
 const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
+
 ---
 
 <Layout>

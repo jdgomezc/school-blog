@@ -8,7 +8,7 @@ interface Props {
     content: string;
 }
 
-const { type = 'post', id, author, title, date, content } = Astro.props;
+const { type = 'POST', id, author, title, date, content } = Astro.props;
 
 const months: string[] = [
     'Enero',
@@ -27,10 +27,10 @@ const months: string[] = [
 
 // dictionary with translation to spanish of the post types
 const post_types: Record<string, string> = {
-    post: 'Publicación',
-    announcement: 'Anuncio',
-    meeting: 'Convocatoria',
-    schedule: 'Cronograma'
+    POST: 'Publicación',
+    ANNOUNCEMENT: 'Anuncio',
+    MEETING: 'Convocatoria',
+    SCHEDULE: 'Cronograma'
 }
 
 let border_color: string;
@@ -58,7 +58,7 @@ switch (type) {
         <p>{post_types[type]}</p>
         <div class="my-auto">
             {
-                type === 'post' ? (
+                type === 'POST' ? (
                         <svg width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Design Icons by Pictogrammers - https://github.com/Templarian/MaterialDesign/blob/master/LICENSE --><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm2 4v2h10V7H7zm0 4v2h10v-2H7zm0 4v2h7v-2H7z" fill="currentColor"/></svg>
                 ) : (
                     type == 'ANNOUNCEMENT' ? (

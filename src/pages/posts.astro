@@ -4,7 +4,7 @@ import Post from "../components/Post.astro";
 
 import bessie from "../assets/bessie.jpeg"
 
-const apiURL = new URL("/api/posts/index.json", Astro.url);
+const apiURL = new URL("/api/posts/filtered.json?type=POST", Astro.url);
 
 const postsFetched: Post[] = await fetch(apiURL, {
           method: 'GET',

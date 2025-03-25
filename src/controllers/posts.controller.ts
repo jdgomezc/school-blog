@@ -4,7 +4,6 @@ export const PostsController = {
     async getPosts() {
         try {
             const posts = await getPosts();
-            console.log("Posts in post controller: ", posts);
             return new Response(JSON.stringify(posts), { status: 200 });
         } catch (error) {
             console.error('Error getting posts:', error);

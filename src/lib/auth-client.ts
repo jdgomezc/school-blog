@@ -14,6 +14,7 @@ const authClient = createAuthClient({
               surname: {
                 type: "string"
               },
+              
               role: {
                 type: "string"
               }

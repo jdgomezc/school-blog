@@ -1,8 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { PostsController } from '@/controllers';
-
-import bessie from "@/assets/bessie.jpeg"
+import { FileText, Download } from 'lucide-react'
 
 export const prerender = true;
 
@@ -29,7 +28,7 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const { post } = Astro.props;
 
-console.log('post:', post)
+// console.log('post:', post)
 
 const { title, description, date, type, author, file_url, file_download_url, file_name } = post;
 
@@ -123,9 +122,8 @@ const months: string[] = [
             {
                 file_url && (
                 <article class="flex flex-row gap-2">
-                    <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M13 3v6h8V3m-8 18h8V11h-8M3 21h8v-6H3m0-2h8V3H3z"/></svg>
-                    <a href={file_url} target="_blank">{file_name ?? 'Cronograma'}</a>
-                    <a href={file_download_url} target="_blank">Descargar</a>
+                    <a href={file_url} target="_blank" class="flex flex-row gap-1"><FileText className="my-auto size-5"/> {file_name ?? 'Cronograma'}</a>
+                    <a href={file_download_url} target="_blank" class="my-auto"><Download className="size-5"/></a>
                 </article>
                 )
             }

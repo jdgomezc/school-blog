@@ -28,7 +28,7 @@ const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
 
         <div id="post-type-btn" class="flex flex-wrap justify-center gap-10 mb-3">
           {['Publicaciones', 'Anuncios', 'Convocatorias', 'Cronogramas'].map((tipo, i) => (
-            <Button datatype={post_types[i]} key={tipo} variant="outline" className="px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white">{tipo}</Button>
+            <Button datatype={post_types[i]} key={tipo} variant={"outline"} className={`px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white ${i === 0 ? "bg-primary text-primary-foreground" : ""}`}>{tipo}</Button>
           ))}
         </div>
 
@@ -40,10 +40,10 @@ const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
 
           <div class="flex flex-col sm:flex-row justify-between items-center gap-2 mt-auto">
             <section class="flex flex-col gap-2">
-              <h2 class="text-sm">Adjunta un archivo PDF</h2>
+              <h2 class="text-sm">Adjunte un archivo</h2>
               <Button variant="outline" className="flex items-center gap-2 w-fit text-sm">
                 <Upload id="input" size={14} />
-                  <input type="file" id="input" accept=".pdf" class="w-64" />
+                  <input type="file" id="input" class="w-64" />
               </Button>
             </section>
             <Button id="publish-button" className="flex items-center gap-2 w-full sm:w-auto text-sm" >

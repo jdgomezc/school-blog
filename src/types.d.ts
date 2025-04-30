@@ -16,9 +16,10 @@ declare global {
     title: string;
     description: string;
     date: Date;
-    type: 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
+    type: "POST" | "ANNOUNCEMENT" | "MEETING" | "SCHEDULE";
     file_url: string;
     file_download_url: string;
+    file_name: string;
     author: Author;
   }
 }

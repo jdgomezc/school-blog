@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import ImagesCarousel from "@/components/ImagesCarousel"
 import Post from "@/components/Post.astro"
 
-const apiURL = new URL("/api/posts/filtered.json?type=POST", Astro.url);
+const apiURL = new URL("/api/posts/index.json", Astro.url);
 
 const posts: Post[] = await fetch(apiURL, {
           method: 'GET',

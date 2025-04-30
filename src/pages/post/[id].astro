@@ -21,7 +21,7 @@ export async function getStaticPaths() {
             console.log("Data: ", data);
 			return data;
 		});;
-    console.log("Posts: ", posts);
+    // console.log("Posts: ", posts);
 
     return posts.map((post: Post) => ({ params: { id: post.id }, props: { post } }));
 }
@@ -29,7 +29,9 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const { post } = Astro.props;
 
-const { title, description, date, type, author } = post;
+console.log('post:', post)
+
+const { title, description, date, type, author, file_url, file_download_url, file_name } = post;
 
 let border_color: string;
 
@@ -118,6 +120,15 @@ const months: string[] = [
                     </section>
                 </article>
             </article>
+            {
+                file_url && (
+                <article class="flex flex-row gap-2">
+                    <svg width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M13 3v6h8V3m-8 18h8V11h-8M3 21h8v-6H3m0-2h8V3H3z"/></svg>
+                    <a href={file_url} target="_blank">{file_name ?? 'Cronograma'}</a>
+                    <a href={file_download_url} target="_blank">Descargar</a>
+                </article>
+                )
+            }
             <p class="text-xl 2xl:text-4xl leading-8 2xl:leading-14">
                 {description}
             </p>

@@ -6,9 +6,7 @@ import Logout from './Lougout';
 
 const currentPath = Astro.url.pathname;
 
-const AstroSession = Astro.locals.session
-
-console.log('astro session in current path:', currentPath, AstroSession);
+// const AstroSession = Astro.locals.session
 
 const routes: Route[] = [
   { name: 'Inicio', route: '/' },
@@ -24,7 +22,7 @@ const routes: Route[] = [
 
 ---
 
-<header class="flex bg-zinc-200 flex-row w-full justify-between px-4 xl:px-12 2xl:px-20 py-4 h-fit ">
+<header class="flex bg-[#0A2459] flex-row w-full justify-between px-4 xl:px-12 2xl:px-20 py-4 h-fit text-white">
   <section class="flex flex-row gap-2">
     <div class="my-auto">
       <Image src={Logo} alt="Logo de la escuela" class="w-18 h-18 select-none" draggable="false" priority={true} />

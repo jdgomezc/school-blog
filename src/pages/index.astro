@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import ImagesCarousel from "@/components/ImagesCarousel"
+import Carousel from "@/components/ImagesCarousel"
 import Post from "@/components/Post.astro"
 
 const apiURL = new URL("/api/posts/index.json", Astro.url);
@@ -16,7 +16,7 @@ const posts: Post[] = await fetch(apiURL, {
 ---
 
 <Layout home="true">
-	<ImagesCarousel client:load />
+	<Carousel client:load />
 	<article class="px-8 2xl:px-24 py-16 grid grid-cols-3 gap-y-16 w-full justify-items-center">
 		{
 			posts.map(({id, title, description, date, type, author}) => (

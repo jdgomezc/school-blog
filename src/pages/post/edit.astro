@@ -4,6 +4,8 @@ import EditCard from "../../components/Edit";
 
 const apiURL = new URL("/api/posts/index.json", Astro.url);
 
+const session = Astro.locals.session;
+
 const posts: Post[] = await fetch(apiURL, {
           method: 'GET',
         })
@@ -11,6 +13,10 @@ const posts: Post[] = await fetch(apiURL, {
 		.then(data => {
 			return data;
 		});
+
+if (!session) {
+  return Astro.redirect('/login');
+}
 
 ---
 

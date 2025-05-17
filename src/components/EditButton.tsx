@@ -45,7 +45,7 @@ export default function EditButton() {
   return (
     <button
       onClick={handleEditRedirect}
-      className="cursor-pointer flex items-center gap-2"
+      className="cursor-pointer flex items-center gap-1.5 py-2 px-3 rounded-lg hover:bg-zinc-100 focus:bg-zinc-200 transition-all ease-in-out duration-200 h-fit my-auto"
     >
       <Pencil size={16} />
       Editar

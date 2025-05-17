@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import { PostsController } from '@/controllers';
 import { FileText, Download, ChevronLeft } from 'lucide-react'
 import EditButton from '@/components/EditButton';
+import DeleteButton from '@/components/DeleteButton';
 
 export const prerender = true;
 
@@ -82,7 +83,10 @@ const months: string[] = [
                 <ChevronLeft className="my-auto size-6" />
                 <span class="text-lg 2xl:text-xl">Regresar</span>
             </button>
-            <EditButton client:load />
+            <article class="flex flex-row gap-0">
+                <EditButton client:load />
+                <DeleteButton client:load />
+            </article>
         </section>
         <h1 class={`text-4xl 2xl:text-7xl pb-1 2xl:pb-4 font-bold border-b-1 mb-2 2xl:mb-8 ${border_color}`}>{title}</h1>
         <section class="flex flex-col mb-4 2xl:mb-16">

@@ -2,10 +2,13 @@
 
 import { Image } from 'astro:assets';
 import Logo from "@/assets/logo.png";
+import Logout from './Lougout';
 
 const currentPath = Astro.url.pathname;
 
 const AstroSession = Astro.locals.session
+
+console.log('astro session in current path:', currentPath, AstroSession);
 
 const routes: Route[] = [
   { name: 'Inicio', route: '/' },
@@ -37,19 +40,9 @@ const routes: Route[] = [
         <li class="hover:scale-105 duration-250 ease-in-out"><a href={route} class={`select-none ${currentPath === route ? "font-semibold" : ""}`} draggable="false">{name}</a></li>
         ))
       }
-      {
-        AstroSession && (
-          <li class="hover:scale-105 duration-250 ease-in-out"><button id="logout-button" class="cursor-pointer" >Cerrar sesión</button></li>
-        )
-      }
+      <li class="hover:scale-105 duration-250 ease-in-out">
+        <Logout client:load />
+      </li>
     </ul>
   </nav>
-  <script>
-    import authClient from '../lib/auth-client';
-
-    document.getElementById("logout-button")?.addEventListener("click", async () => {
-        await authClient.signOut();
-        window.location.href = "/";
-    });
-  </script>
 </header>

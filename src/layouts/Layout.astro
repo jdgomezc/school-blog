@@ -2,6 +2,8 @@
 import "../styles/global.css";
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { ClientRouter } from "astro:transitions";
+import logo from '@/assets/logo.png';
 
 const { home } = Astro.props;
 
@@ -12,9 +14,10 @@ const { home } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href={logo.src} />
 		<meta name="generator" content={Astro.generator} />
 		<title>Escuela 25 de septiembre</title>
+		<ClientRouter />
 	</head>
 	<body>
 			<Header />

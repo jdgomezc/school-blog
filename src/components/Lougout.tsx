@@ -19,7 +19,11 @@ export default function Logout() {
   };
 
   if (!session) {
-    return null;
+    return (
+      <a href="/login" className="cursor-pointer">
+        Iniciar sesión
+      </a>
+    );
   }
 
   return (

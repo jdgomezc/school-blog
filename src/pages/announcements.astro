@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Post from "../components/Post.astro";
+import Logo from "@/assets/logo.png";
 
 const apiURL = new URL("/api/posts/filtered.json?type=ANNOUNCEMENT", Astro.url);
 
@@ -14,7 +15,17 @@ const posts: Post[] = await fetch(apiURL, {
 ---
 
 <Layout>
-	<article class="px-24 py-16 grid grid-cols-3 gap-y-16 w-full justify-items-center">
+	<article class="px-8 2xl:px-24 flex-1 py-16 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-y-16 w-full justify-items-center relative h-full">
+		<div
+			class="absolute inset-0 -z-10"
+			style={`
+				background-image: url(${Logo.src});
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: contain;
+				opacity: 0.15; /* Adjust opacity for "clean" effect, 0.05 for very subtle */
+			`}
+		/>
 		{
 			posts.length > 0 ? (
 			posts

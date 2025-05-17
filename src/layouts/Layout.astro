@@ -21,8 +21,8 @@ const { home } = Astro.props;
 	</head>
 	<body>
 			<Header />
-			<section class="flex flex-col flex-1 overflow-auto">
-				<article class={`${home === "true" ? "" : "py-8 px-16"}  flex-1 flex flex-col`}>
+			<section class="flex flex-col flex-1 overflow-y-auto">
+				<article class={`${home === "true" ? "" : "py-8 px-16"} flex-1 flex flex-col`}>
 					<slot />
 				</article>
 				<Footer />

@@ -25,9 +25,9 @@ const routes: Route[] = [
 <header class="flex bg-[#0A2459] flex-row w-full justify-between px-4 xl:px-12 2xl:px-20 py-4 h-fit text-white">
   <section class="flex flex-row gap-2">
     <div class="my-auto">
-      <Image src={Logo} alt="Logo de la escuela" class="w-18 h-18 select-none" draggable="false" priority={true} />
+      <Image src={Logo} alt="Logo de la escuela" class="size-10 md:size-18 select-none" draggable="false" priority={true} />
     </div>
-    <h1 class="font-semibold text-2xl 2xl:text-3xl  my-auto select-none">
+    <h1 class="font-semibold text-md md:text-2xl 2xl:text-3xl  my-auto select-none">
       Escuela Veinticinco de Septiembre
     </h1>
   </section>
@@ -35,7 +35,7 @@ const routes: Route[] = [
     <ul class="flex flex-row gap-8">
       {
         routes.map(({ name, route }) => (
-        <li class="hover:scale-105 duration-250 ease-in-out"><a href={route} class={`select-none ${currentPath === route ? "font-semibold" : ""}`} draggable="false">{name}</a></li>
+        <li class="hover:scale-105 duration-250 ease-in-out hidden md:flex"><a href={route} class={`select-none ${currentPath === route ? "font-semibold" : ""}`} draggable="false">{name}</a></li>
         ))
       }
       <li class="hover:scale-105 duration-250 ease-in-out">

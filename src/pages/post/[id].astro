@@ -85,7 +85,7 @@ const months: string[] = [
             </button>
             <article class="flex flex-row gap-0">
                 <EditButton client:load />
-                <DeleteButton client:load />
+                <DeleteButton client:load postId={id}/>
             </article>
         </section>
         <h1 class={`text-4xl 2xl:text-7xl pb-1 2xl:pb-4 font-bold border-b-1 mb-2 2xl:mb-8 ${border_color}`}>{title}</h1>

@@ -111,6 +111,7 @@ export default function Edit({ posts }: Props) {
 
       if (response.ok) {
         console.log('Post updated successfully');
+        window.location.href = `/`;
       } else {
         throw new Error('Failed to update post');
       }

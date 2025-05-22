@@ -11,7 +11,11 @@ import {
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
 
-export default function DeleteButton() {
+interface DeleteButtonProps {
+  postId: number;
+}
+
+export default function DeleteButton({ postId }: DeleteButtonProps) {
   const [session, setSession] = useState<any | null>(null);
   const [open, setOpen] = useState(false);
 
@@ -21,8 +25,22 @@ export default function DeleteButton() {
   };
 
   const handleDelete = async () => {
-    console.log("Deleting post");
+
+    const response = await fetch('/api/posts/index.json', {
+      method: 'DELETE',
+      body: JSON.stringify({
+        id: postId,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("Error deleting post");
+      return;
+    } else {
+      console.log("Post deleted successfully");
+    }
     setOpen(false);
+    window.location.href = "/";
   };
 
   useEffect(() => {

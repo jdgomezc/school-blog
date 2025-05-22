@@ -94,3 +94,9 @@ export const updatePost = (postId: number, updatedPost: Partial<PostAPublicar>) 
   .where("id", "=", postId)
   .execute();
 }
+
+export const deletePost = (postId: number) => {
+  return db.deleteFrom("post")
+  .where("id", "=", postId)
+  .execute();
+}

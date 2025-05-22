@@ -13,3 +13,7 @@ export const POST: APIRoute = async ({ request }) => {
 export const PUT: APIRoute = async ({ request }) => {
     return PostsController.editPost(request)
 }
+
+export const DELETE: APIRoute = async ({ request }) => {
+    return PostsController.deletePost(request)
+}

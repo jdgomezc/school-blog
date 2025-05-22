@@ -1,4 +1,4 @@
-import { getPosts, agregarPost, updatePost, getUserId, getPostsFiltered } from "@/services";
+import { getPosts, agregarPost, updatePost, deletePost, getUserId, getPostsFiltered } from "@/services";
 
 export const PostsController = {
     async getPosts() {
@@ -70,6 +70,18 @@ export const PostsController = {
             return new Response(JSON.stringify(updatedPost), { status: 200 });
         } catch (error) {
             return new Response(JSON.stringify({ error: 'Error updating post' }), { status: 500 });
+        }
+    },
+
+    async deletePost(request: Request) {
+        try {
+            const body = await request.json();
+            const postId = body.id;
+            // Assuming you have a function to delete a post by its ID
+            await deletePost(postId);
+            return new Response(JSON.stringify({ message: 'Post deleted successfully' }), { status: 200 });
+        } catch (error) {
+            return new Response(JSON.stringify({ error: 'Error deleting post' }), { status: 500 });
         }
     }
 }

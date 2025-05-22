@@ -11,6 +11,7 @@ export const getPosts = async () => {
       "post.file_url",
       "post.file_download_url",
       "post.type",
+      "post.file_name",
       "post.date",
       "user.name",
       "user.surname",
@@ -47,6 +48,7 @@ export const getPostsFiltered = async (type: PostType) => {
       "post.file_url",
       "post.file_download_url",
       "post.type",
+      "post.file_name",
       "post.date",
       "user.name",
       "user.surname",
@@ -82,5 +84,13 @@ export const agregarPost = (userId: number, newPost: PostAPublicar) => {
     file_url: newPost.file_url,
     file_download_url: newPost.file_download_url,
     type: newPost.type,
+    file_name: newPost.file_name,
   }).execute();
+}
+
+export const updatePost = (postId: number, updatedPost: Partial<PostAPublicar>) => {
+  return db.updateTable("post")
+  .set(updatedPost)
+  .where("id", "=", postId)
+  .execute();
 }

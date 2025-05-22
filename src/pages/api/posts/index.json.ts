@@ -9,3 +9,7 @@ export const GET: APIRoute = async () => {
 export const POST: APIRoute = async ({ request }) => {
     return PostsController.addPost(request)
 }
+
+export const PUT: APIRoute = async ({ request }) => {
+    return PostsController.editPost(request)
+}

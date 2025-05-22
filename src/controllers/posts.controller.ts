@@ -1,4 +1,4 @@
-import { getPosts, agregarPost, getUserId, getPostsFiltered } from "@/services";
+import { getPosts, agregarPost, updatePost, getUserId, getPostsFiltered } from "@/services";
 
 export const PostsController = {
     async getPosts() {
@@ -36,11 +36,40 @@ export const PostsController = {
                 file_url: body.file_url,
                 file_download_url: body.file_download_url,
                 type: body.type,
+                file_name: body.file_name,
             };
             const post = agregarPost(user.id, newPost);
             return new Response(JSON.stringify(post), { status: 200 });           
         } catch (error) {
             return new Response(JSON.stringify({ error: 'Error adding post' }), { status: 500 });
+        }
+    },
+
+    async editPost(request: Request) {
+        try {
+            console.log('Editing post');
+            const body = await request.json();
+            const postId = body.id;
+            let updatedPost: Partial<PostAPublicar> = {
+                title: body.title,
+                description: body.description,
+                type: body.type,
+            };
+
+            if (body.file_url) {
+                updatedPost.file_url = body.file_url;
+            }
+            if (body.file_download_url) {
+                updatedPost.file_download_url = body.file_download_url;
+            }
+            if (body.file_name) {
+                updatedPost.file_name = body.file_name;
+            }
+
+            await updatePost(postId, updatedPost);
+            return new Response(JSON.stringify(updatedPost), { status: 200 });
+        } catch (error) {
+            return new Response(JSON.stringify({ error: 'Error updating post' }), { status: 500 });
         }
     }
 }

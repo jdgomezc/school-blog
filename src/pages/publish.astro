@@ -42,7 +42,7 @@ const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
             <section class="flex flex-col gap-2">
               <h2 class="text-sm">Adjunte un archivo</h2>
               <Button variant="outline" className="flex items-center gap-2 w-fit text-sm">
-                <Upload id="input" size={14} />
+                <Upload size={14} />
                   <input type="file" id="input" class="w-64" />
               </Button>
             </section>
@@ -127,7 +127,8 @@ const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
             description: file_description,
             file_url: fileResult.shareableLink,
             file_download_url: fileResult.downloadLink,
-            type: post_type
+            type: post_type,
+            file_name: fileUploaded.name.split('.')[0],
           }),
         });
 

@@ -29,6 +29,7 @@ interface Database {
     file_url: string;
     file_download_url: string;
     type: 'POST' | 'ANNOUNCEMENT' | 'MEETING' | 'SCHEDULE';
+    file_name: string;
   }
 }
 

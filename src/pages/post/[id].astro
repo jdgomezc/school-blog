@@ -4,6 +4,7 @@ import { PostsController } from '@/controllers';
 import { FileText, Download, ChevronLeft } from 'lucide-react'
 import EditButton from '@/components/EditButton';
 import DeleteButton from '@/components/DeleteButton';
+import { APP_URL } from '@/config/env';
 
 export const prerender = true;
 
@@ -15,8 +16,7 @@ const apiURL = new URL("/api/posts/index.json", Astro.url);
 
 // can be async function to fetch data from an API
 export async function getStaticPaths() {
-    // const apiURL = new URL("http://localhost:4321/pages/api/posts/index.json", Astro.url);
-    const posts = await fetch("http://localhost:4321/api/posts/index.json", {  method: 'GET' })
+    const posts = await fetch(`${APP_URL}/api/posts/index.json`, {  method: 'GET' })
         .then(res => res.json())
 		.then(data => {
             console.log("Data: ", data);

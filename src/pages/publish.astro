@@ -46,7 +46,7 @@ const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
                   <input type="file" id="input" class="w-64" />
               </Button>
             </section>
-            <Button id="publish-button" className="flex items-center gap-2 w-full sm:w-auto text-sm" >
+            <Button id="publish-button" className="flex items-center gap-2 w-full sm:w-auto text-sm disabled:opacity-50 disabled:cursor-not-allowed" >
               <Send size={14} /> Publicar
             </Button>
           </div>
@@ -102,6 +102,8 @@ const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
       }
 
       try {
+        const publish_button = document.getElementById('publish-button');
+
         const uploadedResult = await fetch('/api/files/index.json', {
           method: 'POST',
           body: fileUploaded,
@@ -112,12 +114,15 @@ const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
         });
 
         if (!uploadedResult.ok) {
+          publish_button?.removeAttribute('disabled');
           throw new Error('Upload of file failed');
         }
         
         const fileResult = await uploadedResult.json();
 
         const userEmail = await authClient.getSession();
+
+        publish_button?.setAttribute('disabled', 'true');
 
         const response = await fetch('/api/posts/index.json', {
           method: 'POST',
@@ -134,6 +139,8 @@ const post_types = ['POST', 'ANNOUNCEMENT', 'MEETING', 'SCHEDULE'];
 
         if (response.ok) {
           console.log('File uploaded:', response);
+          window.location.href = '/';
+          publish_button?.removeAttribute('disabled');
         } else {
           throw new Error('Upload of post failed');
         }

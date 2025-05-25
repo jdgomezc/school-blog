@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { ClientRouter } from "astro:transitions";
 import logo from '@/assets/logo.png';
+import { Toaster } from "@/components/ui/sonner"
 
 const { home } = Astro.props;
 
@@ -26,8 +27,9 @@ const { home } = Astro.props;
 					<slot />
 				</article>
 				<Footer />
+				<Toaster client:load />
 			</section>
-	</body>
+		</body>
 </html>
 
 <style>

@@ -16,12 +16,14 @@ declare global {
     title: string;
     description: string;
     date: Date;
-    type: "POST" | "ANNOUNCEMENT" | "MEETING" | "SCHEDULE";
+    type: PostType;
     file_url: string;
     file_download_url: string;
     file_name: string;
     author: Author;
   }
+
+  type PostType = "POST" | "ANNOUNCEMENT" | "MEETING" | "SCHEDULE";
 }
 
 export {};

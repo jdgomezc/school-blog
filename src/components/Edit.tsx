@@ -12,6 +12,7 @@ interface Props {
 }
 
 export default function Edit({ posts }: Props) {
+  const [loading, setLoading] = useState<boolean>(false);
   const post_types = ["POST", "ANNOUNCEMENT", "MEETING", "SCHEDULE"];
   const [post, setPost] = useState<Post | null | undefined>();
   const [session, setSession] = useState<any | null>(null);
@@ -70,53 +71,56 @@ export default function Edit({ posts }: Props) {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFileUploaded(e.target.files?.[0] || null);
   };
-  
+
   // Handle form submission
   const handleSubmit = async () => {
-    
+    setLoading(true);
+
     try {
       let fileResult: any;
       if (fileUploaded) {
-        const uploadedResult = await fetch('/api/files/index.json', {
-          method: 'POST',
+        const uploadedResult = await fetch("/api/files/index.json", {
+          method: "POST",
           body: fileUploaded,
           headers: {
-            'x-file-name': fileUploaded.name,
-            'content-type': fileUploaded.type
-          }
+            "x-file-name": fileUploaded.name,
+            "content-type": fileUploaded.type,
+          },
         });
-  
+
         if (!uploadedResult.ok) {
-          throw new Error('Upload of file failed');
+          throw new Error("Upload of file failed");
         }
-        
+
         fileResult = await uploadedResult.json();
       }
 
       const userEmail = await authClient.getSession();
-      
-      const response = await fetch('/api/posts/index.json', {
-          method: 'PUT',
-          body: JSON.stringify({
-            id: post.id,
-            email: userEmail.data?.user.email,
-            title: postData.title,
-            description: postData.description,
-            file_url: fileUploaded ? fileResult.shareableLink : null,
-            file_download_url: fileUploaded ? fileResult.downloadLink : null,
-            type: postData.postType,
-            file_name: fileUploaded ? fileUploaded.name : null,
-          }),
-        });
+
+      const response = await fetch("/api/posts/index.json", {
+        method: "PUT",
+        body: JSON.stringify({
+          id: post.id,
+          email: userEmail.data?.user.email,
+          title: postData.title,
+          description: postData.description,
+          file_url: fileUploaded ? fileResult.shareableLink : null,
+          file_download_url: fileUploaded ? fileResult.downloadLink : null,
+          type: postData.postType,
+          file_name: fileUploaded ? fileUploaded.name : null,
+        }),
+      });
 
       if (response.ok) {
-        console.log('Post updated successfully');
+        console.log("Post updated successfully");
         window.location.href = `/`;
       } else {
-        throw new Error('Failed to update post');
+        throw new Error("Failed to update post");
       }
     } catch (error) {
-      console.error('Upload error:', error);
+      console.error("Upload error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -150,6 +154,7 @@ export default function Edit({ posts }: Props) {
                     postType: post_types[i] as PostType,
                   });
                 }}
+                disabled={loading}
               >
                 {tipo}
               </Button>
@@ -163,16 +168,22 @@ export default function Edit({ posts }: Props) {
               id="title"
               placeholder="Título"
               className="px-2 py-4 border rounded-sm !text-lg"
-              onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+              onChange={(e) =>
+                setPostData({ ...postData, title: e.target.value })
+              }
               value={postData.title}
+              disabled={loading}
             />
             <Textarea
               id="description"
               placeholder="Descripción"
               className="p-2 border rounded-sm text-sm resize-none h-36"
               rows={15}
-              onChange={(e) => setPostData({ ...postData, description: e.target.value })}
+              onChange={(e) =>
+                setPostData({ ...postData, description: e.target.value })
+              }
               value={postData.description}
+              disabled={loading}
             />
           </div>
 
@@ -182,17 +193,30 @@ export default function Edit({ posts }: Props) {
               <Button
                 variant="outline"
                 className="flex items-center gap-2 w-fit text-sm"
+                disabled={loading}
               >
                 <Upload size={14} />
-                <input type="file" id="input" onChange={handleFileChange} className="w-64" />
+                <input
+                  type="file"
+                  id="input"
+                  onChange={handleFileChange}
+                  className="w-64"
+                />
               </Button>
             </section>
             <Button
               id="publish-button"
-              className="flex items-center gap-2 w-full sm:w-auto text-sm"
+              className="flex items-center gap-2 !w-24 text-sm"
               onClick={handleSubmit}
+              disabled={loading}
             >
-              <Save size={14} /> Guardar
+              {!loading ? (
+                <>
+                  <Save size={14} /> Guardar
+                </>
+              ) : (
+                <Loader2 size={14} className="animate-spin" />
+              )}
             </Button>
           </div>
         </CardContent>

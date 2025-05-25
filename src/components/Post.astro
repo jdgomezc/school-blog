@@ -52,7 +52,7 @@ switch (type) {
 
 ---
 
-<a href={`/post?id=${id}`} class={`bg-[#eee] rounded-lg p-4 pt-8 border-1 w-96 h-72 justify-between flex flex-col relative hover:scale-105 duration-300 ease-in-out cursor-pointer ${border_color}`}>
+<a href={`/post?id=${id}`} class={`bg-[#eee] rounded-lg p-4 pt-8 border-1 w-72 md:w-96 h-72 justify-between flex flex-col relative hover:scale-105 duration-300 ease-in-out cursor-pointer ${border_color}`}>
     <!--absolute label-->
     <div class={`flex flex-row gap-1 absolute -top-4 left-4 bg-[#eee] rounded-md border-1 px-2 py-1 ${border_color}`}>
         <p>{post_types[type]}</p>
@@ -74,21 +74,21 @@ switch (type) {
             }
         </div>
     </div>
-    <section class="flex flex-row justify-between">
-        <article class="flex flex-row gap-2">
-            <img src={author.image} alt={author.name} class="w-10 h-10 rounded-full" />
+    <section class="flex flex-row justify-start md:justify-between gap-2">
+        <img src={author.image} alt={author.name} class="w-10 h-10 rounded-full" />
+        <article class="flex flex-col md:flex-row gap-0">
             <section class="my-auto">
                 <h2 class="leading-none text-base font-bold">{author.name} {author.surname}</h2>
                 <p class="text-sm">{author.role}</p>
             </section>
+            <p class="text-xs md:text-base text-zinc-500">
+                <!--get the date in the spanish format: Mar 3, 2025-->
+                {months[new Date(date)?.getMonth()].slice(0,3)} {new Date(date)?.getDate()}, {new Date(date)?.getFullYear()}
+            </p>
         </article>
-        <p class="text-base text-zinc-500">
-            <!--get the date in the spanish format: Mar 3, 2025-->
-            {months[new Date(date)?.getMonth()].slice(0,3)} {new Date(date)?.getDate()}, {new Date(date)?.getFullYear()}
-        </p>
     </section>
     <section>
-        <h1 class="leading-none font-bold text-lg mb-2">{title.slice(0,65)}{title.length>65?"...": ""}</h1>
+        <h1 class="font-bold text-lg mb-2">{title.slice(0,65)}{title.length>65?"...": ""}</h1>
         <p class="text-base">{content.slice(0,180)}{content.length>180?"...": ""}</p>
     </section>
     <section>

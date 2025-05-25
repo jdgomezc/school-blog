@@ -12,7 +12,7 @@ import {
 import { Button } from "./ui/button";
 
 interface DeleteButtonProps {
-  postId: number;
+  postId?: number;
 }
 
 export default function DeleteButton({ postId }: DeleteButtonProps) {
@@ -25,9 +25,8 @@ export default function DeleteButton({ postId }: DeleteButtonProps) {
   };
 
   const handleDelete = async () => {
-
-    const response = await fetch('/api/posts/index.json', {
-      method: 'DELETE',
+    const response = await fetch("/api/posts/index.json", {
+      method: "DELETE",
       body: JSON.stringify({
         id: postId,
       }),
@@ -47,7 +46,7 @@ export default function DeleteButton({ postId }: DeleteButtonProps) {
     getSession();
   }, []);
 
-  if (!session) {
+  if (!session || !postId) {
     return null;
   }
 

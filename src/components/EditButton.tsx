@@ -15,27 +15,10 @@ export default function EditButton() {
   }, []);
 
   const handleEditRedirect = async () => {
-    // Get the current path and split it into segments
-    const pathSegments = window.location.pathname.split("/");
-    // Filter out any empty segments that can result from leading/trailing/multiple slashes
-    const nonEmptySegments = pathSegments.filter(
-      (segment) => segment.length > 0
-    );
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get("id");
 
-    // The ID is assumed to be the last segment in the path, e.g., /post/XYZ -> ID is XYZ
-    const id =
-      nonEmptySegments.length > 0
-        ? nonEmptySegments[nonEmptySegments.length - 1]
-        : undefined;
-
-    // Redirect to the edit page.
-    // The path to the edit page is assumed to be /post/edit based on
-    // file_context_2 (src/pages/post/edit.astro).
-    // The original code used /edit?id=${id}. This changes it to /post/edit?id=${id}.
-    // If 'id' is undefined (e.g., path was '/' or parsing failed),
-    // it will redirect to /post/edit?id=undefined,
-    // similar to original behavior if urlParams.get('id') was null.
-    window.location.href = `/post/edit?id=${id}`;
+    window.location.href = `/post/edit?id=${postId}`;
   };
 
   if (!session) {

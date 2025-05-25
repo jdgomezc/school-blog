@@ -96,6 +96,7 @@ export default function DeleteButton({ postId }: DeleteButtonProps) {
               variant="destructive"
               onClick={handleDelete}
               disabled={loading}
+              className="!w-24"
             >
               {loading ? <Loader2 className="animate-spin" /> : "Eliminar"}
             </Button>

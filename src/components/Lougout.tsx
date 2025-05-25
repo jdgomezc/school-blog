@@ -20,14 +20,20 @@ export default function Logout() {
 
   if (!session) {
     return (
-      <a href="/login" className="cursor-pointer">
+      <a
+        href="/login"
+        className="text-center text-xs cursor-pointer md:text-base"
+      >
         Iniciar sesión
       </a>
     );
   }
 
   return (
-    <button onClick={handleLogout} className="cursor-pointer">
+    <button
+      onClick={handleLogout}
+      className="text-center text-xs cursor-pointer md:text-base"
+    >
       Cerrar sesión
     </button>
   );

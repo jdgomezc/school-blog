@@ -1,4 +1,4 @@
-import { Send, Upload, Loader2, Save } from "lucide-react";
+import { Upload, Loader2, Save } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Input } from "./ui/input";
@@ -6,6 +6,7 @@ import { Textarea } from "./ui/textarea";
 import { useEffect } from "react";
 import { useState } from "react";
 import authClient from "../lib/auth-client";
+import { APP_URL } from "astro:env/client";
 
 interface Props {
   posts: Post[];
@@ -79,7 +80,7 @@ export default function Edit({ posts }: Props) {
     try {
       let fileResult: any;
       if (fileUploaded) {
-        const uploadedResult = await fetch("/api/files/index.json", {
+        const uploadedResult = await fetch(`${APP_URL}/api/files/index.json`, {
           method: "POST",
           body: fileUploaded,
           headers: {

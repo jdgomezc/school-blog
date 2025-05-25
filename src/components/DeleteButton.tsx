@@ -10,14 +10,22 @@ import {
   AlertDialogFooter,
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
+import { APP_URL } from "astro:env/client";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
 
 interface DeleteButtonProps {
   postId?: number;
 }
 
 export default function DeleteButton({ postId }: DeleteButtonProps) {
+  const [loading, setLoading] = useState<boolean>(false);
   const [session, setSession] = useState<any | null>(null);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    getSession();
+  }, []);
 
   const getSession = async () => {
     const result = await authClient.getSession();
@@ -25,26 +33,34 @@ export default function DeleteButton({ postId }: DeleteButtonProps) {
   };
 
   const handleDelete = async () => {
-    const response = await fetch("/api/posts/index.json", {
-      method: "DELETE",
-      body: JSON.stringify({
-        id: postId,
-      }),
-    });
+    setLoading(true);
 
-    if (!response.ok) {
-      console.error("Error deleting post");
-      return;
-    } else {
-      console.log("Post deleted successfully");
+    try {
+      const response = await fetch(`${APP_URL}/api/posts/index.json`, {
+        method: "DELETE",
+        body: JSON.stringify({
+          id: postId,
+        }),
+      });
+
+      if (!response.ok) {
+        toast.error("Error al eliminar la publicación", {
+          description: "Intente más tarde",
+        });
+        return;
+      }
+
+      toast("Publicación eliminada");
+      setOpen(false);
+      window.location.href = "/";
+    } catch {
+      toast.error("Error al eliminar la publicación", {
+        description: "Intente más tarde",
+      });
+    } finally {
+      setLoading(false);
     }
-    setOpen(false);
-    window.location.href = "/";
   };
-
-  useEffect(() => {
-    getSession();
-  }, []);
 
   if (!session || !postId) {
     return null;
@@ -69,11 +85,19 @@ export default function DeleteButton({ postId }: DeleteButtonProps) {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <Button variant="outline" onClick={() => setOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setOpen(false)}
+              disabled={loading}
+            >
               Cancelar
             </Button>
-            <Button variant="destructive" onClick={handleDelete}>
-              Eliminar
+            <Button
+              variant="destructive"
+              onClick={handleDelete}
+              disabled={loading}
+            >
+              {loading ? <Loader2 className="animate-spin" /> : "Eliminar"}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

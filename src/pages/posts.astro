@@ -2,8 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Post from "../components/Post.astro";
 import Logo from "@/assets/logo.png";
+import { APP_URL } from "astro:env/client";
 
-const apiURL = new URL("/api/posts/filtered.json?type=POST", Astro.url);
+const apiURL = new URL(`${APP_URL}/api/posts/filtered.json?type=POST`, Astro.url);
 
 const posts: Post[] = await fetch(apiURL, {
           method: 'GET',

@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 
 import react from "@astrojs/react";
 
+import netlify from "@astrojs/netlify";
+
 dotenv.config();
 
 // https://astro.build/config
@@ -12,10 +14,15 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+
   image: {
     service: passthroughImageService(),
   },
+
   integrations: [react()],
+
+  adapter: netlify(),
+
   env: {
     schema: {
       DB_HOST: envField.string({

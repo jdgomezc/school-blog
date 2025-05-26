@@ -117,7 +117,7 @@ export default function Publish() {
   if (!session) {
     return (
       <article className="flex-1 grid place-items-center overflow-hidden">
-        <Loader2 className="size-8 animate-spin" />
+        <Loader2 className="size-8 animate-spin text-primary" />
       </article>
     );
   }
@@ -131,10 +131,7 @@ export default function Publish() {
             Elige un tipo de publicación
           </h2>
 
-          <div
-            id="post-type-btn"
-            className="flex flex-wrap justify-center gap-10 mb-3"
-          >
+          <div className="flex flex-wrap justify-center gap-2 md:gap-10 mb-3">
             {["Publicaciones", "Anuncios", "Convocatorias", "Cronogramas"].map(
               (tipo, i) => (
                 <Button
@@ -143,9 +140,7 @@ export default function Publish() {
                   onClick={() => setPostType(post_types[i])}
                   variant={"outline"}
                   className={`px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white ${
-                    postType === post_types[i]
-                      ? "bg-primary text-primary-foreground"
-                      : ""
+                    postType === post_types[i] ? "bg-primary text-white" : ""
                   }`}
                   disabled={loading}
                 >

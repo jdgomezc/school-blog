@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, envField, passthroughImageService } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import node from "@astrojs/node";
 import dotenv from "dotenv";
@@ -13,6 +13,9 @@ dotenv.config();
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
+  },
+  image: {
+    service: passthroughImageService(),
   },
 
   adapter: node({

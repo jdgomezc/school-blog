@@ -84,20 +84,20 @@ export default function PostPreview({ post }: Props) {
           )}
         </div>
       </div>
-      <section className="flex flex-row justify-start md:justify-between gap-2">
+      <section className="flex flex-row justify-start gap-2">
         <img
           src={author.image}
           alt={author.name}
           className="w-10 h-10 rounded-full"
         />
-        <article className="flex flex-col md:flex-row gap-0">
+        <article className="flex flex-col md:flex-row md:justify-between w-full">
           <section className="my-auto">
             <h2 className="leading-none text-base font-bold">
               {author.name} {author.surname}
             </h2>
             <p className="text-sm">{author.role}</p>
           </section>
-          <p className="text-xs md:text-base text-zinc-500">
+          <p className="text-xs md:text-base text-zinc-500 ml-0 flex md:ml-auto">
             {months[new Date(date)?.getMonth()].slice(0, 3)}{" "}
             {new Date(date)?.getDate()}, {new Date(date)?.getFullYear()}
           </p>

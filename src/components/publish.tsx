@@ -155,7 +155,7 @@ export default function Publish() {
               <Input
                 id="title"
                 placeholder="Título"
-                className="px-2 py-4 border rounded-sm !text-lg"
+                className="px-2 py-4 border rounded-sm text-base"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 disabled={loading}
@@ -163,7 +163,7 @@ export default function Publish() {
               <Textarea
                 id="description"
                 placeholder="Descripción"
-                className="p-2 border rounded-sm text-sm resize-none h-36 !text-lg"
+                className="p-2 border rounded-sm text-sm resize-none h-36"
                 rows={15}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -195,7 +195,7 @@ export default function Publish() {
               </section>
               <Button
                 type="button"
-                className="flex select-none items-center disabled:!cursor-not-allowed !w-24 gap-2 sm:w-auto text-sm disabled:opacity-50"
+                className="flex select-none mt-4 md:mt-0 items-center disabled:!cursor-not-allowed !w-24 gap-2 sm:w-auto text-sm disabled:opacity-50"
                 onClick={handlePublish}
                 disabled={
                   loading ||

@@ -18,6 +18,8 @@ if (!session) {
   return Astro.redirect('/login');
 }
 
+export const prerender = false;
+
 ---
 
 <Layout>

@@ -70,9 +70,9 @@ export default function DeleteButton({ postId }: DeleteButtonProps) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="cursor-pointer flex items-center gap-1.5 py-2 px-3 rounded-lg hover:bg-zinc-100 focus:bg-zinc-200 transition-all ease-in-out duration-200 h-fit my-auto"
+        className="text-sm md:text-base cursor-pointer flex items-center gap-1.5 py-2 px-3 rounded-lg hover:bg-zinc-100 focus:bg-zinc-200 transition-all ease-in-out duration-200 h-fit my-auto"
       >
-        <Trash size={16} />
+        <Trash className="my-auto size-4 md:size-5" />
         Eliminar
       </button>
 

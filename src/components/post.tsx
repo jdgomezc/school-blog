@@ -111,11 +111,11 @@ export default function Post() {
 
   return (
     <article className="px-0 md:px-40">
-      <section className="flex flex-row justify-between">
+      <section className="flex flex-row justify-between mb-4 md:mb-8">
         <button
           onClick={() => window.history.back()}
           type="button"
-          className="-ml-3 flex flex-row gap-1 pr-4 cursor-pointer p-2 rounded-lg mb-4 2xl:mb-8 w-fit select-none hover:bg-zinc-100 focus:bg-zinc-200 transition-all ease-in-out duration-200"
+          className="-ml-3 flex flex-row gap-1 pr-4 cursor-pointer p-2 rounded-lg w-fit select-none hover:bg-zinc-100 focus:bg-zinc-200 transition-all ease-in-out duration-200"
         >
           <ChevronLeft className="my-auto size-4 md:size-6" />
           <span className="text-sm md:text-lg 2xl:text-xl">Regresar</span>
@@ -147,7 +147,7 @@ export default function Post() {
             )}
           </div>
         </article>
-        <p className="text-xs md:text-md 2xl:text-lg text-zinc-400">
+        <p className="text-xs md:text-base 2xl:text-lg text-zinc-400">
           {months[new Date(post?.date ?? "").getMonth()]}{" "}
           {new Date(post?.date ?? "").getDate()},{" "}
           {new Date(post?.date ?? "").getFullYear()}
@@ -190,7 +190,7 @@ export default function Post() {
             </a>
           </article>
         )}
-        <p className="text-sm pt-4 md:pt-0 md:text-xl 2xl:text-4xl leading-8 2xl:leading-14">
+        <p className="text-sm pt-4 md:text-xl 2xl:text-4xl leading-8 2xl:leading-14">
           {post?.description}
         </p>
       </section>

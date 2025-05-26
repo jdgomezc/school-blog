@@ -4,8 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import node from "@astrojs/node";
 import dotenv from "dotenv";
 import icon from "astro-icon";
+
 import react from "@astrojs/react";
-// import netlify from "@astrojs/netlify";
 
 dotenv.config();
 

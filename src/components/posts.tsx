@@ -29,7 +29,7 @@ export default function Posts({ type }: Props) {
 
   if (posts === undefined) {
     return (
-      <article className="flex flex-1 justify-center items-center">
+      <article className="flex flex-1 justify-center items-center py-4">
         <Loader2 className="animate-spin" />
       </article>
     );

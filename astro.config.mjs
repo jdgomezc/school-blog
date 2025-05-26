@@ -16,9 +16,7 @@ export default defineConfig({
   },
 
   output: "server",
-  adapter: netlify({
-    edgeMiddleware: true,
-  }),
+  adapter: netlify(),
   experimental: {
     session: true,
   },

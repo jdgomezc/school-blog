@@ -126,102 +126,105 @@ export default function Edit({ posts }: Props) {
   };
 
   return (
-    <Card className="w-full max-w-4xl mx-4 shadow-lg">
-      <div className="p-4 flex flex-col h-full justify-between">
-        <h1 className="text-xl text-center mb-3 font-bold">
-          Editar Publicación
-        </h1>
-        <h2 className="text-base text-center mb-3">
-          Elige un tipo de publicación
-        </h2>
+    <div className="grid place-items-center overflow-hidden flex-1">
+      <Card className="w-full max-w-4xl mx-4 shadow-lg">
+        <div className="p-4 flex flex-col h-full justify-between">
+          <h1 className="text-xl text-center mb-3 font-bold">
+            Editar publicación
+          </h1>
+          <h2 className="text-base text-center mb-3">
+            Elige un tipo de publicación
+          </h2>
 
-        <div
-          id="post-type-btn"
-          className="flex flex-wrap justify-center gap-10 mb-3"
-        >
-          {["Publicaciones", "Anuncios", "Convocatorias", "Cronogramas"].map(
-            (tipo, i) => (
+          <div
+            id="post-type-btn"
+            className="flex flex-wrap justify-center gap-2 md:gap-10 mb-3"
+          >
+            {["Publicaciones", "Anuncios", "Convocatorias", "Cronogramas"].map(
+              (tipo, i) => (
+                <Button
+                  key={tipo}
+                  variant={"outline"}
+                  className={`px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white ${
+                    post_types[i] === postData.postType
+                      ? "bg-primary text-primary-foreground"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    setPostData({
+                      ...postData,
+                      postType: post_types[i] as PostType,
+                    });
+                  }}
+                  disabled={loading}
+                >
+                  {tipo}
+                </Button>
+              )
+            )}
+          </div>
+
+          <CardContent className="p-0 h-72 flex flex-col">
+            <div className="flex flex-col gap-2">
+              <Input
+                id="title"
+                placeholder="Título"
+                className="px-2 py-4 border rounded-sm text-base"
+                onChange={(e) =>
+                  setPostData({ ...postData, title: e.target.value })
+                }
+                value={postData.title}
+                disabled={loading}
+              />
+              <Textarea
+                id="description"
+                placeholder="Descripción"
+                className="p-2 border rounded-sm text-sm resize-none h-36"
+                rows={15}
+                onChange={(e) =>
+                  setPostData({ ...postData, description: e.target.value })
+                }
+                value={postData.description}
+                disabled={loading}
+              />
+            </div>
+
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mt-auto">
+              <section className="flex flex-col gap-2">
+                <h2 className="text-sm">Adjunte un archivo</h2>
+                <Button
+                  variant="outline"
+                  className="flex items-center gap-2 w-fit text-sm"
+                  disabled={loading}
+                >
+                  <Upload size={14} />
+                  <input
+                    type="file"
+                    id="input"
+                    onChange={handleFileChange}
+                    className="w-64"
+                  />
+                </Button>
+              </section>
               <Button
-                key={tipo}
-                variant={"outline"}
-                className={`px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white ${
-                  post_types[i] === postData.postType
-                    ? "bg-primary text-primary-foreground"
-                    : ""
-                }`}
-                onClick={() => {
-                  setPostData({
-                    ...postData,
-                    postType: post_types[i] as PostType,
-                  });
-                }}
+                id="publish-button"
+                className="flex items-center gap-2 !w-24 text-sm mt-4 md:mt-0"
+                onClick={handleSubmit}
+                type="button"
                 disabled={loading}
               >
-                {tipo}
+                {!loading ? (
+                  <>
+                    <Save size={14} /> Guardar
+                  </>
+                ) : (
+                  <Loader2 size={14} className="animate-spin" />
+                )}
               </Button>
-            )
-          )}
+            </div>
+          </CardContent>
         </div>
-
-        <CardContent className="p-0 h-72 flex flex-col">
-          <div className="flex flex-col gap-2">
-            <Input
-              id="title"
-              placeholder="Título"
-              className="px-2 py-4 border rounded-sm !text-lg"
-              onChange={(e) =>
-                setPostData({ ...postData, title: e.target.value })
-              }
-              value={postData.title}
-              disabled={loading}
-            />
-            <Textarea
-              id="description"
-              placeholder="Descripción"
-              className="p-2 border rounded-sm text-sm resize-none h-36"
-              rows={15}
-              onChange={(e) =>
-                setPostData({ ...postData, description: e.target.value })
-              }
-              value={postData.description}
-              disabled={loading}
-            />
-          </div>
-
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mt-auto">
-            <section className="flex flex-col gap-2">
-              <h2 className="text-sm">Adjunte un archivo</h2>
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 w-fit text-sm"
-                disabled={loading}
-              >
-                <Upload size={14} />
-                <input
-                  type="file"
-                  id="input"
-                  onChange={handleFileChange}
-                  className="w-64"
-                />
-              </Button>
-            </section>
-            <Button
-              id="publish-button"
-              className="flex items-center gap-2 !w-24 text-sm"
-              onClick={handleSubmit}
-              disabled={loading}
-            >
-              {!loading ? (
-                <>
-                  <Save size={14} /> Guardar
-                </>
-              ) : (
-                <Loader2 size={14} className="animate-spin" />
-              )}
-            </Button>
-          </div>
-        </CardContent>
-      </div>
-    </Card>
+      </Card>
+    </div>
   );
 }

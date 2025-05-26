@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Posts from "@/components/posts";
+
+---
+export const prerender = false;
+
+<Layout>
+	<Posts type="MEETING" client:load />
+</Layout>

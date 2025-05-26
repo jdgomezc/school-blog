@@ -1,0 +1,3 @@
+const DB_HOST = "ep-young-fog-a87nvmng-pooler.eastus2.azure.neon.tech";const DB_PORT = 5432;const DB_NAME = "escuela25del12";const DB_USER = "escuela25del12_owner";const DB_PASSWORD = "npg_VN7xYCv4zhjP";const BETTER_AUTH_SECRET = "FqP6nwpmNxMSfzHUWZbp4eUuKPGwkWIC";const BETTER_AUTH_URL = "http://localhost:4321";const IMG_FOLDER = "17uaz4qBaKOkalg0n9w4NYb2g64-eNgs7";const PDF_FOLDER = "1mfCrOpaJe8PwOdisMtD7ihnRdTulSCwT";const APP_URL = "http://localhost:4321";
+
+export { APP_URL as A, BETTER_AUTH_URL as B, DB_PASSWORD as D, IMG_FOLDER as I, PDF_FOLDER as P, BETTER_AUTH_SECRET as a, DB_USER as b, DB_NAME as c, DB_PORT as d, DB_HOST as e };

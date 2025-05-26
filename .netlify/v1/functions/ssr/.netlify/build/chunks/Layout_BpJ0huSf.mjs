@@ -1,0 +1,144 @@
+import { c as createComponent, b as createAstro, m as maybeRenderHead, r as renderComponent, d as addAttribute, a as renderTemplate, e as renderScript, f as renderHead, g as renderSlot } from './astro/server_DLxTQpo-.mjs';
+import 'kleur/colors';
+/* empty css                                 */
+import '@astrojs/internal-helpers/path';
+import '@astrojs/internal-helpers/remote';
+import { $ as $$Image } from './_astro_assets_BpcFDoPc.mjs';
+import { jsx } from 'react/jsx-runtime';
+import { createAuthClient } from 'better-auth/client';
+import { usernameClient, inferAdditionalFields } from 'better-auth/client/plugins';
+import { A as APP_URL } from './client_550KDs2Y.mjs';
+import { useState, useEffect } from 'react';
+import 'clsx';
+import { useTheme } from 'next-themes';
+import { Toaster as Toaster$1 } from 'sonner';
+
+const Logo = new Proxy({"src":"/_astro/logo.DJtoGnPr.png","width":1245,"height":1280,"format":"png"}, {
+						get(target, name, receiver) {
+							if (name === 'clone') {
+								return structuredClone(target);
+							}
+							if (name === 'fsPath') {
+								return "/Users/jdgomez/UVG/extension_hours/school-blog/src/assets/logo.png";
+							}
+							
+							return target[name];
+						}
+					});
+
+const authClient = createAuthClient({
+  emailAndPassword: {
+    enabled: true
+  },
+  plugins: [
+    usernameClient(),
+    inferAdditionalFields({
+      user: {
+        surname: {
+          type: "string"
+        },
+        role: {
+          type: "string"
+        }
+      }
+    })
+  ],
+  baseURL: APP_URL
+});
+
+function Logout() {
+  const [session, setSession] = useState(null);
+  const getSession = async () => {
+    const result = await authClient.getSession();
+    setSession(result.data?.session);
+  };
+  useEffect(() => {
+    getSession();
+  }, []);
+  const handleLogout = async () => {
+    await authClient.signOut();
+    window.location.href = "/";
+  };
+  if (!session) {
+    return /* @__PURE__ */ jsx(
+      "a",
+      {
+        href: "/login",
+        className: "text-center text-xs cursor-pointer md:text-base",
+        children: "Iniciar sesión"
+      }
+    );
+  }
+  return /* @__PURE__ */ jsx(
+    "button",
+    {
+      onClick: handleLogout,
+      className: "text-center text-xs cursor-pointer md:text-base",
+      children: "Cerrar sesión"
+    }
+  );
+}
+
+const $$Astro$2 = createAstro();
+const $$Header = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$2, $$props, $$slots);
+  Astro2.self = $$Header;
+  const currentPath = Astro2.url.pathname;
+  const routes = [
+    { name: "Inicio", route: "/" },
+    { name: "Publicaciones", route: "/posts" },
+    { name: "Anuncios", route: "/announcements" },
+    { name: "Convocatorias", route: "/meetings" },
+    { name: "Cronogramas", route: "/schedules" },
+    { name: "Publicar", route: "/publish" }
+    // TODO: Add conditional rendering for authenticated users only
+    // TODO: this 'login' route will be deleted
+    // { name: 'Login', route: '/login' },
+  ];
+  return renderTemplate`${maybeRenderHead()}<header class="flex bg-[#0A2459] flex-row w-full justify-between px-4 xl:px-12 2xl:px-20 py-4 h-fit text-white"> <a href="/" class="flex flex-row gap-2"> <div class="my-auto"> ${renderComponent($$result, "Image", $$Image, { "src": Logo, "alt": "Logo de la escuela", "class": "size-10 md:size-18 select-none", "draggable": "false", "priority": true })} </div> <h1 class="font-semibold text-md md:text-2xl 2xl:text-3xl  my-auto select-none">
+Escuela Veinticinco de Septiembre
+</h1> </a> <nav class="my-auto"> <ul class="flex flex-row gap-8"> ${routes.map(({ name, route }) => renderTemplate`<li class="hover:scale-105 duration-250 ease-in-out hidden md:flex"><a${addAttribute(route, "href")}${addAttribute(`select-none ${currentPath === route ? "font-semibold" : ""}`, "class")} draggable="false">${name}</a></li>`)} <li class="hover:scale-105 duration-250 ease-in-out"> ${renderComponent($$result, "Logout", Logout, { "client:load": true, "client:component-hydration": "load", "client:component-path": "/Users/jdgomez/UVG/extension_hours/school-blog/src/components/Lougout", "client:component-export": "default" })} </li> </ul> </nav> </header>`;
+}, "/Users/jdgomez/UVG/extension_hours/school-blog/src/components/Header.astro", void 0);
+
+const $$Footer = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`${maybeRenderHead()}<footer class="flex bg-gradient-to-r from-[#44a400] to-[#3d9200] md:flex-row flex-col gap-16 md:gap-0 w-full justify-between px-4 md:px-8 xl:px-12 2xl:px-20 py-10 mt-auto"> <a href="/" class="flex flex-row gap-1"> <div class="my-auto"> ${renderComponent($$result, "Image", $$Image, { "src": Logo, "alt": "Logo de la escuela", "class": "size-10 md:size-16 select-none", "draggable": "false" })} </div> <div class="my-auto"> <h1 class="font-bold text-base md:text-xl 2xl:text-2xl my-auto select-none text-white">
+Escuela Veinticinco de Septiembre
+</h1> <p class="text-xs md:text-sm text-white">
+6ta calle A 14-59 zona 7 colonia Quinta Samayoa, Ciudad Guatemala
+</p> </div> </a> <nav class="my-auto"> <ul class="flex flex-col md:flex-row gap-8"> <li class="my-auto hover:scale-105 transform transition-transform duration-300 ease-in-out"> <a${addAttribute("https://wa.me/50212345678", "href")} target="_blank" class="flex flex-row gap-2 hover:text-[#1BB5F2]" draggable="false"> <svg${addAttribute(30, "width")}${addAttribute(30, "height")} viewBox="0 0 256 258"><defs><linearGradient id="logosWhatsappIcon0" x1="50%" x2="50%" y1="100%" y2="0%"><stop offset="0%" stop-color="#1faf38"></stop><stop offset="100%" stop-color="#60d669"></stop></linearGradient><linearGradient id="logosWhatsappIcon1" x1="50%" x2="50%" y1="100%" y2="0%"><stop offset="0%" stop-color="#f9f9f9"></stop><stop offset="100%" stop-color="#fff"></stop></linearGradient></defs><path fill="url(#logosWhatsappIcon0)" d="M5.463 127.456c-.006 21.677 5.658 42.843 16.428 61.499L4.433 252.697l65.232-17.104a123 123 0 0 0 58.8 14.97h.054c67.815 0 123.018-55.183 123.047-123.01c.013-32.867-12.775-63.773-36.009-87.025c-23.23-23.25-54.125-36.061-87.043-36.076c-67.823 0-123.022 55.18-123.05 123.004"></path><path fill="url(#logosWhatsappIcon1)" d="M1.07 127.416c-.007 22.457 5.86 44.38 17.014 63.704L0 257.147l67.571-17.717c18.618 10.151 39.58 15.503 60.91 15.511h.055c70.248 0 127.434-57.168 127.464-127.423c.012-34.048-13.236-66.065-37.3-90.15C194.633 13.286 162.633.014 128.536 0C58.276 0 1.099 57.16 1.071 127.416m40.24 60.376l-2.523-4.005c-10.606-16.864-16.204-36.352-16.196-56.363C22.614 69.029 70.138 21.52 128.576 21.52c28.3.012 54.896 11.044 74.9 31.06c20.003 20.018 31.01 46.628 31.003 74.93c-.026 58.395-47.551 105.91-105.943 105.91h-.042c-19.013-.01-37.66-5.116-53.922-14.765l-3.87-2.295l-40.098 10.513z"></path><path fill="#fff" d="M96.678 74.148c-2.386-5.303-4.897-5.41-7.166-5.503c-1.858-.08-3.982-.074-6.104-.074c-2.124 0-5.575.799-8.492 3.984c-2.92 3.188-11.148 10.892-11.148 26.561s11.413 30.813 13.004 32.94c1.593 2.123 22.033 35.307 54.405 48.073c26.904 10.609 32.379 8.499 38.218 7.967c5.84-.53 18.844-7.702 21.497-15.139c2.655-7.436 2.655-13.81 1.859-15.142c-.796-1.327-2.92-2.124-6.105-3.716s-18.844-9.298-21.763-10.361c-2.92-1.062-5.043-1.592-7.167 1.597c-2.124 3.184-8.223 10.356-10.082 12.48c-1.857 2.129-3.716 2.394-6.9.801c-3.187-1.598-13.444-4.957-25.613-15.806c-9.468-8.442-15.86-18.867-17.718-22.056c-1.858-3.184-.199-4.91 1.398-6.497c1.431-1.427 3.186-3.719 4.78-5.578c1.588-1.86 2.118-3.187 3.18-5.311c1.063-2.126.531-3.986-.264-5.579c-.798-1.593-6.987-17.343-9.819-23.64"></path></svg> <div class="my-auto"> <p class="font-semibold text-sm text-white leading-none">WhatsApp</p> <p class="text-xs text-white">1234-5678</p> </div> </a> </li> <li class="my-auto hover:scale-105 transform transition-transform duration-300 ease-in-out"> <a${addAttribute("tel:+50223569558", "href")} target="_blank" class="flex flex-row gap-2" draggable="false"> <svg${addAttribute(32, "width")}${addAttribute(32, "height")} viewBox="0 0 24 24"><path fill="white" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02z"></path></svg> <div class="my-auto"> <p class="font-semibold text-sm leading-none text-white">Número telefónico</p> <p class="text-xs text-white">1234-5678</p> </div> </a> </li> <li class="my-auto hover:scale-105 transform transition-transform duration-300 ease-in-out"> <a${addAttribute("https://www.facebook.com/escuela.veinticincodeseptiembre", "href")} target="_blank" class="flex flex-row gap-2" draggable="false"> <svg${addAttribute(32, "width")}${addAttribute(32, "height")} viewBox="0 0 256 256"><path fill="#1877f2" d="M256 128C256 57.308 198.692 0 128 0S0 57.308 0 128c0 63.888 46.808 116.843 108 126.445V165H75.5v-37H108V99.8c0-32.08 19.11-49.8 48.348-49.8C170.352 50 185 52.5 185 52.5V84h-16.14C152.959 84 148 93.867 148 103.99V128h35.5l-5.675 37H148v89.445c61.192-9.602 108-62.556 108-126.445"></path><path fill="#fff" d="m177.825 165l5.675-37H148v-24.01C148 93.866 152.959 84 168.86 84H185V52.5S170.352 50 156.347 50C127.11 50 108 67.72 108 99.8V128H75.5v37H108v89.445A129 129 0 0 0 128 256a129 129 0 0 0 20-1.555V165z"></path></svg> <div class="my-auto"> <p class="font-semibold text-sm leading-none text-white">Facebook</p> <p class="text-xs text-white">Escuela Veinticinco de Septiembre</p> </div> </a> </li> </ul> </nav> </footer>`;
+}, "/Users/jdgomez/UVG/extension_hours/school-blog/src/components/Footer.astro", void 0);
+
+const $$Astro$1 = createAstro();
+const $$ClientRouter = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro$1, $$props, $$slots);
+  Astro2.self = $$ClientRouter;
+  const { fallback = "animate" } = Astro2.props;
+  return renderTemplate`<meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback"${addAttribute(fallback, "content")}>${renderScript($$result, "/Users/jdgomez/UVG/extension_hours/school-blog/node_modules/.pnpm/astro@5.8.0_@netlify+blobs@8.2.0_@types+node@22.15.21_jiti@2.4.2_lightningcss@1.30.1_rollup@4.41.1_typescript@5.8.3/node_modules/astro/components/ClientRouter.astro?astro&type=script&index=0&lang.ts")}`;
+}, "/Users/jdgomez/UVG/extension_hours/school-blog/node_modules/.pnpm/astro@5.8.0_@netlify+blobs@8.2.0_@types+node@22.15.21_jiti@2.4.2_lightningcss@1.30.1_rollup@4.41.1_typescript@5.8.3/node_modules/astro/components/ClientRouter.astro", void 0);
+
+const Toaster = ({ ...props }) => {
+  const { theme = "system" } = useTheme();
+  return /* @__PURE__ */ jsx(
+    Toaster$1,
+    {
+      theme,
+      className: "toaster group",
+      style: {
+        "--normal-bg": "var(--popover)",
+        "--normal-text": "var(--popover-foreground)",
+        "--normal-border": "var(--border)"
+      },
+      ...props
+    }
+  );
+};
+
+const $$Astro = createAstro();
+const $$Layout = createComponent(($$result, $$props, $$slots) => {
+  const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
+  Astro2.self = $$Layout;
+  const { home } = Astro2.props;
+  return renderTemplate`<html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml"${addAttribute(Logo.src, "href")}><meta name="generator"${addAttribute(Astro2.generator, "content")}><title>Escuela 25 de septiembre</title>${renderComponent($$result, "ClientRouter", $$ClientRouter, { "data-astro-cid-sckkx6r4": true })}${renderHead()}</head> <body data-astro-cid-sckkx6r4> ${renderComponent($$result, "Header", $$Header, { "data-astro-cid-sckkx6r4": true })} <section class="flex flex-col flex-1 overflow-y-auto" data-astro-cid-sckkx6r4> <article${addAttribute(`${home === "true" ? "" : "py-8 px-16"} flex-1 flex flex-col`, "class")} data-astro-cid-sckkx6r4> ${renderSlot($$result, $$slots["default"])} </article> ${renderComponent($$result, "Footer", $$Footer, { "data-astro-cid-sckkx6r4": true })} ${renderComponent($$result, "Toaster", Toaster, { "client:load": true, "client:component-hydration": "load", "client:component-path": "@/components/ui/sonner", "client:component-export": "Toaster", "data-astro-cid-sckkx6r4": true })} </section> </body></html>`;
+}, "/Users/jdgomez/UVG/extension_hours/school-blog/src/layouts/Layout.astro", void 0);
+
+export { $$Layout as $, Logo as L, authClient as a };

@@ -1,0 +1,9 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SignIn from "@/components/login";
+export const prerender = false;
+---
+
+<Layout>
+    <SignIn client:load />
+</Layout>

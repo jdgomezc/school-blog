@@ -81,7 +81,7 @@ export default function DeleteButton({ postId }: DeleteButtonProps) {
           <AlertDialogHeader>
             <AlertDialogTitle>Eliminar publicación</AlertDialogTitle>
             <AlertDialogDescription>
-              ¿Estás seguro de querer eliminar esta publicación?
+              ¿Está seguro de querer eliminar esta publicación?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -96,7 +96,7 @@ export default function DeleteButton({ postId }: DeleteButtonProps) {
               variant="destructive"
               onClick={handleDelete}
               disabled={loading}
-              className="!w-24"
+              className="md:!w-24 hover:bg-red-800"
             >
               {loading ? <Loader2 className="animate-spin" /> : "Eliminar"}
             </Button>

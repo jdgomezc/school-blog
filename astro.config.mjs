@@ -4,8 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 import node from "@astrojs/node";
 import dotenv from "dotenv";
 import icon from "astro-icon";
-
 import react from "@astrojs/react";
+import netlify from "@astrojs/netlify/functions";
 
 dotenv.config();
 
@@ -15,11 +15,14 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  adapter: node({
-    mode: "standalone",
-  }),
-
   output: "server",
+  adapter: netlify({
+    edgeMiddleware: true,
+  }),
+  experimental: {
+    session: true,
+  },
+
   integrations: [
     react(),
     icon({

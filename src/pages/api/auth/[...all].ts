@@ -5,8 +5,4 @@ export const ALL: APIRoute = async (ctx) => {
   return auth.handler(ctx.request);
 };
 
-export async function getStaticPaths() {
-  return [
-    // Add your dynamic paths here
-  ];
-}
+export const prerender = false;

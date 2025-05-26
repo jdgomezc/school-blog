@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,6 +12,7 @@ import { toast } from "sonner";
 const post_types: PostType[] = ["POST", "ANNOUNCEMENT", "MEETING", "SCHEDULE"];
 
 export default function Publish() {
+  const [session, setSession] = useState<any | null | undefined>();
   const [loading, setLoading] = useState<boolean>(false);
 
   const [title, setTitle] = useState<string>("");
@@ -20,7 +21,20 @@ export default function Publish() {
   const [postType, setPostType] = useState<PostType>("POST");
   const [fileUploaded, setFileUploaded] = useState<File | null>(null);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    getSession();
+  }, []);
+
+  const getSession = async () => {
+    const result = await authClient.getSession();
+    if (result.data?.session) {
+      setSession(result.data?.session);
+    } else {
+      window.location.href = "/login";
+    }
+  };
+
+  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     setFileUploaded(file || null);
   };
@@ -99,6 +113,14 @@ export default function Publish() {
       setFileUploaded(null);
     }
   };
+
+  if (!session) {
+    return (
+      <article className="flex-1 grid place-items-center overflow-hidden">
+        <Loader2 className="size-8 animate-spin" />
+      </article>
+    );
+  }
 
   return (
     <div className="grid place-items-center overflow-hidden flex-1">

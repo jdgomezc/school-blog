@@ -2,10 +2,6 @@
 import Layout from "@/layouts/Layout.astro";
 import PublishCard from "@/components/publish";
 
-if (!Astro.locals.session) {
-  return Astro.redirect('/login');
-}
-
 ---
 
 <Layout>

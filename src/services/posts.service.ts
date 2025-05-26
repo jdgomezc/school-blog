@@ -81,10 +81,10 @@ export const agregarPost = (userId: number, newPost: PostAPublicar) => {
     usuario_id: userId,
     title: newPost.title,
     description: newPost.description,
-    file_url: newPost.file_url,
-    file_download_url: newPost.file_download_url,
     type: newPost.type,
-    file_name: newPost.file_name,
+    file_url: newPost.file_url ?? "",
+    file_download_url: newPost.file_download_url ?? "",
+    file_name: newPost.file_name ?? "",
   }).execute();
 }
 

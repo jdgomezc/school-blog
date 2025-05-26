@@ -42,11 +42,6 @@ export default function Publish() {
   const handlePublish = async () => {
     if (loading) return;
 
-    if (!fileUploaded) {
-      toast.error("No se ha seleccionado ningún archivo");
-      return;
-    }
-
     if (!title.trim()) {
       toast.error("El título es requerido");
       return;
@@ -60,24 +55,28 @@ export default function Publish() {
     setLoading(true);
 
     try {
-      const uploadedResult = await fetch(`${APP_URL}/api/files/index.json`, {
-        method: "POST",
-        body: fileUploaded,
-        headers: {
-          "x-file-name": fileUploaded.name,
-          "content-type": fileUploaded.type,
-        },
-      });
+      let fileResult;
 
-      if (!uploadedResult.ok) {
-        toast.error("Error al subir el archivo a drive", {
-          description:
-            "Verifica que el archivo no este corrupto o no sea demasiado grande",
+      if (fileUploaded) {
+        const uploadedResult = await fetch(`${APP_URL}/api/files/index.json`, {
+          method: "POST",
+          body: fileUploaded,
+          headers: {
+            "x-file-name": fileUploaded.name,
+            "content-type": fileUploaded.type,
+          },
         });
-        return;
+  
+        if (!uploadedResult.ok) {
+          toast.error("Error al subir el archivo a drive", {
+            description:
+              "Verifica que el archivo no este corrupto o no sea demasiado grande",
+          });
+          return;
+        }
+  
+        fileResult = await uploadedResult.json();
       }
-
-      const fileResult = await uploadedResult.json();
       const userSession = await authClient.getSession();
 
       const response = await fetch(`${APP_URL}/api/posts/index.json`, {
@@ -86,10 +85,10 @@ export default function Publish() {
           email: userSession.data?.user.email,
           title: title.trim(),
           description: description.trim(),
-          file_url: fileResult.shareableLink,
-          file_download_url: fileResult.downloadLink,
+          file_url: fileResult ? fileResult.shareableLink : "",
+          file_download_url: fileResult ? fileResult.downloadLink : "",
           type: postType,
-          file_name: fileUploaded.name.split(".")[0],
+          file_name: fileResult ? fileUploaded?.name.split(".")[0] : "",
         }),
       });
 
@@ -199,7 +198,6 @@ export default function Publish() {
                 onClick={handlePublish}
                 disabled={
                   loading ||
-                  !fileUploaded ||
                   !title.trim() ||
                   !description.trim()
                 }

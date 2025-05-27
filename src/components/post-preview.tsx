@@ -104,14 +104,8 @@ export default function PostPreview({ post }: Props) {
         </article>
       </section>
       <section>
-        <h1 className="font-bold text-lg mb-2">
-          {title.slice(0, 65)}
-          {title.length > 65 ? "..." : ""}
-        </h1>
-        <p className="text-base">
-          {description.slice(0, 180)}
-          {description.length > 180 ? "..." : ""}
-        </p>
+        <h1 className="font-bold text-lg mb-2 line-clamp-2">{title}</h1>
+        <p className="text-base line-clamp-3">{description}</p>
       </section>
       <section>
         <button type="button" className="bg-zinc-300 px-4 py-2 cursor-pointer">

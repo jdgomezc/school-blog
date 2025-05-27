@@ -65,10 +65,14 @@ export default defineConfig({
         access: "public",
         context: "client",
       }),
-      // GOOGLE_SERVICE_ACCOUNT: envField.string({
-      //   access: "public",
-      //   context: "client",
-      // }),
+      GOOGLE_CLIENT_EMAIL: envField.string({
+        access: "public",
+        context: "client",
+      }),
+      GOOGLE_PRIVATE_KEY: envField.string({
+        access: "public",
+        context: "client",
+      }),
     },
   },
 });

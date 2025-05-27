@@ -9,6 +9,8 @@ import {
   IMG_FOLDER,
   PDF_FOLDER,
   APP_URL,
+  GOOGLE_CLIENT_EMAIL,
+  GOOGLE_PRIVATE_KEY,
 } from "astro:env/client";
 
 export {
@@ -22,4 +24,6 @@ export {
   IMG_FOLDER,
   PDF_FOLDER,
   APP_URL,
+  GOOGLE_CLIENT_EMAIL,
+  GOOGLE_PRIVATE_KEY,
 };

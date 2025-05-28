@@ -3,13 +3,15 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import authClient from "@/lib/auth-client";
-import { Loader2 } from "lucide-react";
+import { Loader2, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Login() {
   const [session, setSession] = useState<any | null>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -61,7 +63,7 @@ export default function Login() {
           <p className="text-gray-600 mb-6 text-center">
             Ingresa tus credenciales para poder publicar.
           </p>
-          <div className="rounded-lg bg-white p-6 shadow-md border border-gray-300 h-fit">
+          <div className="rounded-lg bg-white p-6 shadow-md border border-zinc-500 h-fit">
             <form id="login-form" className="space-y-4 h-full flex flex-col">
               <div>
                 <Label className="mb-2 block" htmlFor="username">
@@ -82,15 +84,24 @@ export default function Login() {
                 <Label className="mb-2 block" htmlFor="password">
                   Contraseña
                 </Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Ingrese su contraseña"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  disabled={loading}
-                />
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Ingrese su contraseña"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    disabled={loading}
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {!showPassword ? <EyeOff /> : <Eye />}
+                  </button>
+                </div>
               </div>
 
               <div className="flex flex-col justify-between items-center gap-3 mt-2 w-full">

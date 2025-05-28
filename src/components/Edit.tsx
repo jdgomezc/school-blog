@@ -54,8 +54,8 @@ export default function Edit({ posts }: Props) {
 
   if (!session || post === undefined) {
     return (
-      <article className="flex justify-center items-center h-full w-full">
-        <Loader2 className="animate-spin" />
+      <article className="flex-1 grid place-items-center overflow-hidden">
+        <Loader2 className="size-8 animate-spin text-primary" />
       </article>
     );
   }
@@ -127,7 +127,7 @@ export default function Edit({ posts }: Props) {
 
   return (
     <div className="grid place-items-center overflow-hidden flex-1">
-      <Card className="w-full max-w-4xl mx-4 shadow-lg">
+      <Card className="w-full max-w-4xl mx-4 shadow-lg border-zinc-500">
         <div className="p-4 flex flex-col h-full justify-between">
           <h1 className="text-xl text-center mb-3 font-bold">
             Editar publicación
@@ -145,7 +145,7 @@ export default function Edit({ posts }: Props) {
                 <Button
                   key={tipo}
                   variant={"outline"}
-                  className={`px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white ${
+                  className={`px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white border-zinc-400 ${
                     post_types[i] === postData.postType
                       ? "bg-primary text-primary-foreground"
                       : ""

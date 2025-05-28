@@ -66,7 +66,7 @@ export default function Publish() {
             "content-type": fileUploaded.type,
           },
         });
-  
+
         if (!uploadedResult.ok) {
           toast.error("Error al subir el archivo a drive", {
             description:
@@ -74,7 +74,7 @@ export default function Publish() {
           });
           return;
         }
-  
+
         fileResult = await uploadedResult.json();
       }
       const userSession = await authClient.getSession();
@@ -123,7 +123,7 @@ export default function Publish() {
 
   return (
     <div className="grid place-items-center overflow-hidden flex-1">
-      <Card className="w-full max-w-4xl mx-4 shadow-lg">
+      <Card className="w-full max-w-4xl mx-4 shadow-lg border-zinc-500">
         <div className="p-4 flex flex-col h-full justify-between">
           <h1 className="text-xl text-center mb-3 font-bold">Publicar</h1>
           <h2 className="text-base text-center mb-3">
@@ -138,7 +138,7 @@ export default function Publish() {
                   key={i}
                   onClick={() => setPostType(post_types[i])}
                   variant={"outline"}
-                  className={`px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white ${
+                  className={`px-3 py-1 text-sm cursor-pointer hover:bg-primary hover:text-white border-zinc-400 ${
                     postType === post_types[i] ? "bg-primary text-white" : ""
                   }`}
                   disabled={loading}
@@ -196,11 +196,7 @@ export default function Publish() {
                 type="button"
                 className="flex select-none mt-4 md:mt-0 items-center disabled:!cursor-not-allowed !w-24 gap-2 sm:w-auto text-sm disabled:opacity-50"
                 onClick={handlePublish}
-                disabled={
-                  loading ||
-                  !title.trim() ||
-                  !description.trim()
-                }
+                disabled={loading || !title.trim() || !description.trim()}
               >
                 {loading ? (
                   <Loader2 size={14} className="animate-spin" />
